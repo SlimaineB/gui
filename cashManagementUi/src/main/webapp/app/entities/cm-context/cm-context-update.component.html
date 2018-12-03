@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-cm-context-heading" jhiTranslate="cashManagementUiApp.cmContext.home.createOrEditLabel">Create or edit a Cm Context</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!cmContext.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="cmContext.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmContext.contextId" for="field_contextId">Context Id</label>
+                    <input type="number" class="form-control" name="contextId" id="field_contextId"
+                        [(ngModel)]="cmContext.contextId" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmContext.contextType" for="field_contextType">Context Type</label>
+                    <input type="number" class="form-control" name="contextType" id="field_contextType"
+                        [(ngModel)]="cmContext.contextType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmContext.contextName" for="field_contextName">Context Name</label>
+                    <input type="text" class="form-control" name="contextName" id="field_contextName"
+                        [(ngModel)]="cmContext.contextName" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmContext.contextValue" for="field_contextValue">Context Value</label>
+                    <input type="text" class="form-control" name="contextValue" id="field_contextValue"
+                        [(ngModel)]="cmContext.contextValue" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmContext.contextDateTime" for="field_contextDateTime">Context Date Time</label>
+                    <div class="d-flex">
+                        <input id="field_contextDateTime" type="datetime-local" class="form-control" name="contextDateTime" [(ngModel)]="contextDateTime"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmContext.request" for="field_request">Request</label>
+                    <select class="form-control" id="field_request" name="request" [(ngModel)]="cmContext.request" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="cmRequestOption.id === cmContext.request?.id ? cmContext.request : cmRequestOption" *ngFor="let cmRequestOption of cmrequests; trackBy: trackCmRequestById">{{cmRequestOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

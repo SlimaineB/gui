@@ -1,0 +1,26 @@
+{
+    "cashManagementUiApp": {
+        "cmContext": {
+            "home": {
+                "title": "CmContexts",
+                "createLabel": "Créer un nouveau Cm Context",
+                "createOrEditLabel": "Créer ou éditer un Cm Context"
+            },
+            "created": "Un nouveau Cm Context a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Cm Context avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Cm Context avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Cm Context {{ id }} ?"
+            },
+            "detail": {
+                "title": "Cm Context"
+            },
+            "contextId": "Context Id",
+            "contextType": "Context Type",
+            "contextName": "Context Name",
+            "contextValue": "Context Value",
+            "contextDateTime": "Context Date Time",
+            "request": "Request"
+        }
+    }
+}

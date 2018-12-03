@@ -1,0 +1,74 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="cashManagementUiApp.cmAction.home.title">Cm Actions</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-cm-action" [routerLink]="['/cm-action/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="cashManagementUiApp.cmAction.home.createLabel">
+            Create new Cm Action
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="cmActions">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="actionId"><span jhiTranslate="cashManagementUiApp.cmAction.actionId">Action Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="actionNum"><span jhiTranslate="cashManagementUiApp.cmAction.actionNum">Action Num</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="actionType"><span jhiTranslate="cashManagementUiApp.cmAction.actionType">Action Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="actionDescription"><span jhiTranslate="cashManagementUiApp.cmAction.actionDescription">Action Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="actionInput"><span jhiTranslate="cashManagementUiApp.cmAction.actionInput">Action Input</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="actionOutput"><span jhiTranslate="cashManagementUiApp.cmAction.actionOutput">Action Output</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="actionDateTime"><span jhiTranslate="cashManagementUiApp.cmAction.actionDateTime">Action Date Time</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="actionDuration"><span jhiTranslate="cashManagementUiApp.cmAction.actionDuration">Action Duration</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="request.id"><span jhiTranslate="cashManagementUiApp.cmAction.request">Request</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let cmAction of cmActions ;trackBy: trackId">
+                <td><a [routerLink]="['/cm-action', cmAction.id, 'view' ]">{{cmAction.id}}</a></td>
+                <td>{{cmAction.actionId}}</td>
+                <td>{{cmAction.actionNum}}</td>
+                <td>{{cmAction.actionType}}</td>
+                <td>{{cmAction.actionDescription}}</td>
+                <td>{{cmAction.actionInput}}</td>
+                <td>{{cmAction.actionOutput}}</td>
+                <td>{{cmAction.actionDateTime | date:'medium'}}</td>
+                <td>{{cmAction.actionDuration}}</td>
+                <td>
+                    <div *ngIf="cmAction.request">
+                        <a [routerLink]="['../cm-request', cmAction.request?.id, 'view' ]" >{{cmAction.request?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/cm-action', cmAction.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/cm-action', cmAction.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'cm-action/'+ cmAction.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

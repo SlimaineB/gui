@@ -1,0 +1,87 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="cmRequest">
+            <h2><span jhiTranslate="cashManagementUiApp.cmRequest.detail.title">Cm Request</span> {{cmRequest.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cashManagementUiApp.cmRequest.requestId">Request Id</span></dt>
+                <dd>
+                    <span>{{cmRequest.requestId}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmRequest.requestUuid">Request Uuid</span></dt>
+                <dd>
+                    <span>{{cmRequest.requestUuid}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmRequest.serviceName">Service Name</span></dt>
+                <dd>
+                    <span>{{cmRequest.serviceName}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmRequest.serviceEndpoint">Service Endpoint</span></dt>
+                <dd>
+                    <span>{{cmRequest.serviceEndpoint}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmRequest.instanceHostname">Instance Hostname</span></dt>
+                <dd>
+                    <span>{{cmRequest.instanceHostname}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmRequest.instancePort">Instance Port</span></dt>
+                <dd>
+                    <span>{{cmRequest.instancePort}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmRequest.requestBody">Request Body</span></dt>
+                <dd>
+                    <span>{{cmRequest.requestBody}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmRequest.requestHeader">Request Header</span></dt>
+                <dd>
+                    <span>{{cmRequest.requestHeader}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmRequest.responseBody">Response Body</span></dt>
+                <dd>
+                    <span>{{cmRequest.responseBody}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmRequest.responseHeader">Response Header</span></dt>
+                <dd>
+                    <span>{{cmRequest.responseHeader}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmRequest.returnHttpCode">Return Http Code</span></dt>
+                <dd>
+                    <span>{{cmRequest.returnHttpCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmRequest.technicalStatus">Technical Status</span></dt>
+                <dd>
+                    <span>{{cmRequest.technicalStatus}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmRequest.functionalStatus">Functional Status</span></dt>
+                <dd>
+                    <span>{{cmRequest.functionalStatus}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmRequest.startDateTime">Start Date Time</span></dt>
+                <dd>
+                    <span>{{cmRequest.startDateTime}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmRequest.endDateTime">End Date Time</span></dt>
+                <dd>
+                    <span>{{cmRequest.endDateTime}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmRequest.requestDuration">Request Duration</span></dt>
+                <dd>
+                    <span>{{cmRequest.requestDuration}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/cm-request', cmRequest.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

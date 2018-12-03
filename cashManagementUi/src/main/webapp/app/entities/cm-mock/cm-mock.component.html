@@ -1,0 +1,74 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="cashManagementUiApp.cmMock.home.title">Cm Mocks</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-cm-mock" [routerLink]="['/cm-mock/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="cashManagementUiApp.cmMock.home.createLabel">
+            Create new Cm Mock
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="cmMocks">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="mockId"><span jhiTranslate="cashManagementUiApp.cmMock.mockId">Mock Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="mockServiceName"><span jhiTranslate="cashManagementUiApp.cmMock.mockServiceName">Mock Service Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="mockSearchKey"><span jhiTranslate="cashManagementUiApp.cmMock.mockSearchKey">Mock Search Key</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="mockSearchValue"><span jhiTranslate="cashManagementUiApp.cmMock.mockSearchValue">Mock Search Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="mockedBody"><span jhiTranslate="cashManagementUiApp.cmMock.mockedBody">Mocked Body</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="mockedHttpCode"><span jhiTranslate="cashManagementUiApp.cmMock.mockedHttpCode">Mocked Http Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="mockedTime"><span jhiTranslate="cashManagementUiApp.cmMock.mockedTime">Mocked Time</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let cmMock of cmMocks ;trackBy: trackId">
+                <td><a [routerLink]="['/cm-mock', cmMock.id, 'view' ]">{{cmMock.id}}</a></td>
+                <td>{{cmMock.mockId}}</td>
+                <td>{{cmMock.mockServiceName}}</td>
+                <td>{{cmMock.mockSearchKey}}</td>
+                <td>{{cmMock.mockSearchValue}}</td>
+                <td>{{cmMock.mockedBody}}</td>
+                <td>{{cmMock.mockedHttpCode}}</td>
+                <td>{{cmMock.mockedTime}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/cm-mock', cmMock.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/cm-mock', cmMock.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'cm-mock/'+ cmMock.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="cmMocks && cmMocks.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+{
+    "cashManagementUiApp": {
+        "cmAction": {
+            "home": {
+                "title": "Cm Actions",
+                "createLabel": "Create a new Cm Action",
+                "createOrEditLabel": "Create or edit a Cm Action"
+            },
+            "created": "A new Cm Action is created with identifier {{ param }}",
+            "updated": "A Cm Action is updated with identifier {{ param }}",
+            "deleted": "A Cm Action is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Cm Action {{ id }}?"
+            },
+            "detail": {
+                "title": "Cm Action"
+            },
+            "actionId": "Action Id",
+            "actionNum": "Action Num",
+            "actionType": "Action Type",
+            "actionDescription": "Action Description",
+            "actionInput": "Action Input",
+            "actionOutput": "Action Output",
+            "actionDateTime": "Action Date Time",
+            "actionDuration": "Action Duration",
+            "request": "Request"
+        }
+    }
+}

@@ -1,0 +1,42 @@
+{
+    "name": "CmContext",
+    "fields": [
+        {
+            "fieldName": "contextId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "contextType",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "contextName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "contextValue",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "contextDateTime",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "request",
+            "otherEntityName": "cmRequest",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20181206153927",
+    "entityTableName": "cm_context",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

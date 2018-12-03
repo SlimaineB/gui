@@ -1,0 +1,39 @@
+{
+    "cashManagementUiApp": {
+        "cmRequest": {
+            "home": {
+                "title": "Cm Requests",
+                "createLabel": "Create a new Cm Request",
+                "createOrEditLabel": "Create or edit a Cm Request"
+            },
+            "created": "A new Cm Request is created with identifier {{ param }}",
+            "updated": "A Cm Request is updated with identifier {{ param }}",
+            "deleted": "A Cm Request is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Cm Request {{ id }}?"
+            },
+            "detail": {
+                "title": "Cm Request"
+            },
+            "requestId": "Request Id",
+            "requestUuid": "Request Uuid",
+            "serviceName": "Service Name",
+            "serviceEndpoint": "Service Endpoint",
+            "instanceHostname": "Instance Hostname",
+            "instancePort": "Instance Port",
+            "requestBody": "Request Body",
+            "requestHeader": "Request Header",
+            "responseBody": "Response Body",
+            "responseHeader": "Response Header",
+            "returnHttpCode": "Return Http Code",
+            "technicalStatus": "Technical Status",
+            "functionalStatus": "Functional Status",
+            "startDateTime": "Start Date Time",
+            "endDateTime": "End Date Time",
+            "requestDuration": "Request Duration",
+            "action": "Action",
+            "context": "Context",
+            "error": "Error"
+        }
+    }
+}

@@ -1,0 +1,63 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-cm-error-heading" jhiTranslate="cashManagementUiApp.cmError.home.createOrEditLabel">Create or edit a Cm Error</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!cmError.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="cmError.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmError.errorId" for="field_errorId">Error Id</label>
+                    <input type="number" class="form-control" name="errorId" id="field_errorId"
+                        [(ngModel)]="cmError.errorId" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmError.errorComponent" for="field_errorComponent">Error Component</label>
+                    <input type="number" class="form-control" name="errorComponent" id="field_errorComponent"
+                        [(ngModel)]="cmError.errorComponent" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmError.errorCode" for="field_errorCode">Error Code</label>
+                    <input type="text" class="form-control" name="errorCode" id="field_errorCode"
+                        [(ngModel)]="cmError.errorCode" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmError.errorDescription" for="field_errorDescription">Error Description</label>
+                    <input type="text" class="form-control" name="errorDescription" id="field_errorDescription"
+                        [(ngModel)]="cmError.errorDescription" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmError.errorStackTrace" for="field_errorStackTrace">Error Stack Trace</label>
+                    <input type="text" class="form-control" name="errorStackTrace" id="field_errorStackTrace"
+                        [(ngModel)]="cmError.errorStackTrace" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmError.errornDateTime" for="field_errornDateTime">Errorn Date Time</label>
+                    <div class="d-flex">
+                        <input id="field_errornDateTime" type="datetime-local" class="form-control" name="errornDateTime" [(ngModel)]="errornDateTime"
+                        />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmError.request" for="field_request">Request</label>
+                    <select class="form-control" id="field_request" name="request" [(ngModel)]="cmError.request" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="cmRequestOption.id === cmError.request?.id ? cmError.request : cmRequestOption" *ngFor="let cmRequestOption of cmrequests; trackBy: trackCmRequestById">{{cmRequestOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

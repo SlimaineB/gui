@@ -1,0 +1,73 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-cm-action-heading" jhiTranslate="cashManagementUiApp.cmAction.home.createOrEditLabel">Create or edit a Cm Action</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!cmAction.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="cmAction.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmAction.actionId" for="field_actionId">Action Id</label>
+                    <input type="number" class="form-control" name="actionId" id="field_actionId"
+                        [(ngModel)]="cmAction.actionId" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmAction.actionNum" for="field_actionNum">Action Num</label>
+                    <input type="number" class="form-control" name="actionNum" id="field_actionNum"
+                        [(ngModel)]="cmAction.actionNum" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmAction.actionType" for="field_actionType">Action Type</label>
+                    <input type="text" class="form-control" name="actionType" id="field_actionType"
+                        [(ngModel)]="cmAction.actionType" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmAction.actionDescription" for="field_actionDescription">Action Description</label>
+                    <input type="text" class="form-control" name="actionDescription" id="field_actionDescription"
+                        [(ngModel)]="cmAction.actionDescription" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmAction.actionInput" for="field_actionInput">Action Input</label>
+                    <input type="text" class="form-control" name="actionInput" id="field_actionInput"
+                        [(ngModel)]="cmAction.actionInput" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmAction.actionOutput" for="field_actionOutput">Action Output</label>
+                    <input type="text" class="form-control" name="actionOutput" id="field_actionOutput"
+                        [(ngModel)]="cmAction.actionOutput" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmAction.actionDateTime" for="field_actionDateTime">Action Date Time</label>
+                    <div class="d-flex">
+                        <input id="field_actionDateTime" type="datetime-local" class="form-control" name="actionDateTime" [(ngModel)]="actionDateTime"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmAction.actionDuration" for="field_actionDuration">Action Duration</label>
+                    <input type="number" class="form-control" name="actionDuration" id="field_actionDuration"
+                        [(ngModel)]="cmAction.actionDuration" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmAction.request" for="field_request">Request</label>
+                    <select class="form-control" id="field_request" name="request" [(ngModel)]="cmAction.request" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="cmRequestOption.id === cmAction.request?.id ? cmAction.request : cmRequestOption" *ngFor="let cmRequestOption of cmrequests; trackBy: trackCmRequestById">{{cmRequestOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

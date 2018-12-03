@@ -1,0 +1,54 @@
+{
+    "name": "CmAction",
+    "fields": [
+        {
+            "fieldName": "actionId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "actionNum",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "actionType",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "actionDescription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "actionInput",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "actionOutput",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "actionDateTime",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "actionDuration",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "request",
+            "otherEntityName": "cmRequest",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20181206153925",
+    "entityTableName": "cm_action",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

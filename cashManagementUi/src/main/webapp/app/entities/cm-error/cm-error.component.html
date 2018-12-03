@@ -1,0 +1,70 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="cashManagementUiApp.cmError.home.title">Cm Errors</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-cm-error" [routerLink]="['/cm-error/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="cashManagementUiApp.cmError.home.createLabel">
+            Create new Cm Error
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="cmErrors">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="errorId"><span jhiTranslate="cashManagementUiApp.cmError.errorId">Error Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="errorComponent"><span jhiTranslate="cashManagementUiApp.cmError.errorComponent">Error Component</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="errorCode"><span jhiTranslate="cashManagementUiApp.cmError.errorCode">Error Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="errorDescription"><span jhiTranslate="cashManagementUiApp.cmError.errorDescription">Error Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="errorStackTrace"><span jhiTranslate="cashManagementUiApp.cmError.errorStackTrace">Error Stack Trace</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="errornDateTime"><span jhiTranslate="cashManagementUiApp.cmError.errornDateTime">Errorn Date Time</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="request.id"><span jhiTranslate="cashManagementUiApp.cmError.request">Request</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let cmError of cmErrors ;trackBy: trackId">
+                <td><a [routerLink]="['/cm-error', cmError.id, 'view' ]">{{cmError.id}}</a></td>
+                <td>{{cmError.errorId}}</td>
+                <td>{{cmError.errorComponent}}</td>
+                <td>{{cmError.errorCode}}</td>
+                <td>{{cmError.errorDescription}}</td>
+                <td>{{cmError.errorStackTrace}}</td>
+                <td>{{cmError.errornDateTime | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="cmError.request">
+                        <a [routerLink]="['../cm-request', cmError.request?.id, 'view' ]" >{{cmError.request?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/cm-error', cmError.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/cm-error', cmError.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'cm-error/'+ cmError.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

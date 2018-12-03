@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity CmAction.
+    -->
+    <changeSet id="20181206153925-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="request_id"
+                                 baseTableName="cm_action"
+                                 constraintName="fk_cm_action_request_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="cm_request"/>
+
+    </changeSet>
+</databaseChangeLog>

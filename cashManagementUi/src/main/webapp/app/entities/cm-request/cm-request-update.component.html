@@ -1,0 +1,110 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-cm-request-heading" jhiTranslate="cashManagementUiApp.cmRequest.home.createOrEditLabel">Create or edit a Cm Request</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!cmRequest.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="cmRequest.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.requestId" for="field_requestId">Request Id</label>
+                    <input type="number" class="form-control" name="requestId" id="field_requestId"
+                        [(ngModel)]="cmRequest.requestId" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.requestUuid" for="field_requestUuid">Request Uuid</label>
+                    <input type="text" class="form-control" name="requestUuid" id="field_requestUuid"
+                        [(ngModel)]="cmRequest.requestUuid" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.serviceName" for="field_serviceName">Service Name</label>
+                    <input type="text" class="form-control" name="serviceName" id="field_serviceName"
+                        [(ngModel)]="cmRequest.serviceName" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.serviceEndpoint" for="field_serviceEndpoint">Service Endpoint</label>
+                    <input type="text" class="form-control" name="serviceEndpoint" id="field_serviceEndpoint"
+                        [(ngModel)]="cmRequest.serviceEndpoint" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.instanceHostname" for="field_instanceHostname">Instance Hostname</label>
+                    <div class="d-flex">
+                        <input id="field_instanceHostname" type="datetime-local" class="form-control" name="instanceHostname" [(ngModel)]="instanceHostname"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.instancePort" for="field_instancePort">Instance Port</label>
+                    <input type="number" class="form-control" name="instancePort" id="field_instancePort"
+                        [(ngModel)]="cmRequest.instancePort" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.requestBody" for="field_requestBody">Request Body</label>
+                    <input type="text" class="form-control" name="requestBody" id="field_requestBody"
+                        [(ngModel)]="cmRequest.requestBody" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.requestHeader" for="field_requestHeader">Request Header</label>
+                    <input type="text" class="form-control" name="requestHeader" id="field_requestHeader"
+                        [(ngModel)]="cmRequest.requestHeader" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.responseBody" for="field_responseBody">Response Body</label>
+                    <input type="text" class="form-control" name="responseBody" id="field_responseBody"
+                        [(ngModel)]="cmRequest.responseBody" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.responseHeader" for="field_responseHeader">Response Header</label>
+                    <input type="text" class="form-control" name="responseHeader" id="field_responseHeader"
+                        [(ngModel)]="cmRequest.responseHeader" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.returnHttpCode" for="field_returnHttpCode">Return Http Code</label>
+                    <input type="number" class="form-control" name="returnHttpCode" id="field_returnHttpCode"
+                        [(ngModel)]="cmRequest.returnHttpCode" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.technicalStatus" for="field_technicalStatus">Technical Status</label>
+                    <input type="text" class="form-control" name="technicalStatus" id="field_technicalStatus"
+                        [(ngModel)]="cmRequest.technicalStatus" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.functionalStatus" for="field_functionalStatus">Functional Status</label>
+                    <input type="text" class="form-control" name="functionalStatus" id="field_functionalStatus"
+                        [(ngModel)]="cmRequest.functionalStatus" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.startDateTime" for="field_startDateTime">Start Date Time</label>
+                    <div class="d-flex">
+                        <input id="field_startDateTime" type="datetime-local" class="form-control" name="startDateTime" [(ngModel)]="startDateTime"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.endDateTime" for="field_endDateTime">End Date Time</label>
+                    <div class="d-flex">
+                        <input id="field_endDateTime" type="datetime-local" class="form-control" name="endDateTime" [(ngModel)]="endDateTime"
+                        />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.requestDuration" for="field_requestDuration">Request Duration</label>
+                    <input type="number" class="form-control" name="requestDuration" id="field_requestDuration"
+                        [(ngModel)]="cmRequest.requestDuration" />
+                </div>
+
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,68 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="cashManagementUiApp.cmContext.home.title">Cm Contexts</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-cm-context" [routerLink]="['/cm-context/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="cashManagementUiApp.cmContext.home.createLabel">
+            Create new Cm Context
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="cmContexts">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
+            <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="contextId"><span jhiTranslate="cashManagementUiApp.cmContext.contextId">Context Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="contextType"><span jhiTranslate="cashManagementUiApp.cmContext.contextType">Context Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="contextName"><span jhiTranslate="cashManagementUiApp.cmContext.contextName">Context Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="contextValue"><span jhiTranslate="cashManagementUiApp.cmContext.contextValue">Context Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="contextDateTime"><span jhiTranslate="cashManagementUiApp.cmContext.contextDateTime">Context Date Time</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th jhiSortBy="request.id"><span jhiTranslate="cashManagementUiApp.cmContext.request">Request</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+            <tr *ngFor="let cmContext of cmContexts ;trackBy: trackId">
+                <td><a [routerLink]="['/cm-context', cmContext.id, 'view' ]">{{cmContext.id}}</a></td>
+                <td>{{cmContext.contextId}}</td>
+                <td>{{cmContext.contextType}}</td>
+                <td>{{cmContext.contextName}}</td>
+                <td>{{cmContext.contextValue}}</td>
+                <td>{{cmContext.contextDateTime | date:'medium'}}</td>
+                <td>
+                    <div *ngIf="cmContext.request">
+                        <a [routerLink]="['../cm-request', cmContext.request?.id, 'view' ]" >{{cmContext.request?.id}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/cm-context', cmContext.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/cm-context', cmContext.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'cm-context/'+ cmContext.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+{
+    "cashManagementUiApp": {
+        "cmMock": {
+            "home": {
+                "title": "Cm Mocks",
+                "createLabel": "Create a new Cm Mock",
+                "createOrEditLabel": "Create or edit a Cm Mock"
+            },
+            "created": "A new Cm Mock is created with identifier {{ param }}",
+            "updated": "A Cm Mock is updated with identifier {{ param }}",
+            "deleted": "A Cm Mock is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Cm Mock {{ id }}?"
+            },
+            "detail": {
+                "title": "Cm Mock"
+            },
+            "mockId": "Mock Id",
+            "mockServiceName": "Mock Service Name",
+            "mockSearchKey": "Mock Search Key",
+            "mockSearchValue": "Mock Search Value",
+            "mockedBody": "Mocked Body",
+            "mockedHttpCode": "Mocked Http Code",
+            "mockedTime": "Mocked Time"
+        }
+    }
+}

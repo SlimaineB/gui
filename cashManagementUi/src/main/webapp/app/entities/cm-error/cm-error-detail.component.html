@@ -1,0 +1,53 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="cmError">
+            <h2><span jhiTranslate="cashManagementUiApp.cmError.detail.title">Cm Error</span> {{cmError.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cashManagementUiApp.cmError.errorId">Error Id</span></dt>
+                <dd>
+                    <span>{{cmError.errorId}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmError.errorComponent">Error Component</span></dt>
+                <dd>
+                    <span>{{cmError.errorComponent}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmError.errorCode">Error Code</span></dt>
+                <dd>
+                    <span>{{cmError.errorCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmError.errorDescription">Error Description</span></dt>
+                <dd>
+                    <span>{{cmError.errorDescription}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmError.errorStackTrace">Error Stack Trace</span></dt>
+                <dd>
+                    <span>{{cmError.errorStackTrace}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmError.errornDateTime">Errorn Date Time</span></dt>
+                <dd>
+                    <span>{{cmError.errornDateTime}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmError.request">Request</span></dt>
+                <dd>
+                    <div *ngIf="cmError.request">
+                        <a [routerLink]="['/cm-request', cmError.request?.id, 'view']">{{cmError.request?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/cm-error', cmError.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

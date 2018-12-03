@@ -1,0 +1,57 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-cm-mock-heading" jhiTranslate="cashManagementUiApp.cmMock.home.createOrEditLabel">Create or edit a Cm Mock</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!cmMock.id">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="cmMock.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmMock.mockId" for="field_mockId">Mock Id</label>
+                    <input type="number" class="form-control" name="mockId" id="field_mockId"
+                        [(ngModel)]="cmMock.mockId" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmMock.mockServiceName" for="field_mockServiceName">Mock Service Name</label>
+                    <input type="number" class="form-control" name="mockServiceName" id="field_mockServiceName"
+                        [(ngModel)]="cmMock.mockServiceName" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmMock.mockSearchKey" for="field_mockSearchKey">Mock Search Key</label>
+                    <input type="text" class="form-control" name="mockSearchKey" id="field_mockSearchKey"
+                        [(ngModel)]="cmMock.mockSearchKey" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmMock.mockSearchValue" for="field_mockSearchValue">Mock Search Value</label>
+                    <input type="text" class="form-control" name="mockSearchValue" id="field_mockSearchValue"
+                        [(ngModel)]="cmMock.mockSearchValue" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmMock.mockedBody" for="field_mockedBody">Mocked Body</label>            
+                    <textarea class="form-control" name="mockedBody" id="field_mockedBody"  rows="5" [(ngModel)]="cmMock.mockedBody"></textarea>    
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmMock.mockedHttpCode" for="field_mockedHttpCode">Mocked Http Code</label>
+                    <input type="text" class="form-control" name="mockedHttpCode" id="field_mockedHttpCode"
+                        [(ngModel)]="cmMock.mockedHttpCode" />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmMock.mockedTime" for="field_mockedTime">Mocked Time</label>
+                    <input type="number" class="form-control" name="mockedTime" id="field_mockedTime"
+                        [(ngModel)]="cmMock.mockedTime" />
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

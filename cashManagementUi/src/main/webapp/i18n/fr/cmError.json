@@ -1,0 +1,27 @@
+{
+    "cashManagementUiApp": {
+        "cmError": {
+            "home": {
+                "title": "CmErrors",
+                "createLabel": "Créer un nouveau Cm Error",
+                "createOrEditLabel": "Créer ou éditer un Cm Error"
+            },
+            "created": "Un nouveau Cm Error a été créé avec l'identifiant {{ param }}",
+            "updated": "Le Cm Error avec l'identifiant {{ param }} a été mis à jour",
+            "deleted": "Le Cm Error avec l'identifiant {{ param }} a été supprimé",
+            "delete": {
+                "question": "Etes-vous certain de vouloir supprimer le Cm Error {{ id }} ?"
+            },
+            "detail": {
+                "title": "Cm Error"
+            },
+            "errorId": "Error Id",
+            "errorComponent": "Error Component",
+            "errorCode": "Error Code",
+            "errorDescription": "Error Description",
+            "errorStackTrace": "Error Stack Trace",
+            "errornDateTime": "Errorn Date Time",
+            "request": "Request"
+        }
+    }
+}

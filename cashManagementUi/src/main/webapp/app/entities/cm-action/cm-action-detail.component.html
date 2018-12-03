@@ -1,0 +1,61 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="cmAction">
+            <h2><span jhiTranslate="cashManagementUiApp.cmAction.detail.title">Cm Action</span> {{cmAction.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cashManagementUiApp.cmAction.actionId">Action Id</span></dt>
+                <dd>
+                    <span>{{cmAction.actionId}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmAction.actionNum">Action Num</span></dt>
+                <dd>
+                    <span>{{cmAction.actionNum}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmAction.actionType">Action Type</span></dt>
+                <dd>
+                    <span>{{cmAction.actionType}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmAction.actionDescription">Action Description</span></dt>
+                <dd>
+                    <span>{{cmAction.actionDescription}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmAction.actionInput">Action Input</span></dt>
+                <dd>
+                    <span>{{cmAction.actionInput}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmAction.actionOutput">Action Output</span></dt>
+                <dd>
+                    <span>{{cmAction.actionOutput}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmAction.actionDateTime">Action Date Time</span></dt>
+                <dd>
+                    <span>{{cmAction.actionDateTime}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmAction.actionDuration">Action Duration</span></dt>
+                <dd>
+                    <span>{{cmAction.actionDuration}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmAction.request">Request</span></dt>
+                <dd>
+                    <div *ngIf="cmAction.request">
+                        <a [routerLink]="['/cm-request', cmAction.request?.id, 'view']">{{cmAction.request?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/cm-action', cmAction.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

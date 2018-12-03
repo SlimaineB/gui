@@ -1,0 +1,46 @@
+{
+    "name": "CmError",
+    "fields": [
+        {
+            "fieldName": "errorId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "errorComponent",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "errorCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "errorDescription",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "errorStackTrace",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "errornDateTime",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "request",
+            "otherEntityName": "cmRequest",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20181206153926",
+    "entityTableName": "cm_error",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

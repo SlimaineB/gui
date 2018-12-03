@@ -1,0 +1,43 @@
+{
+    "name": "CmMock",
+    "fields": [
+        {
+            "fieldName": "mockId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "mockServiceName",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "mockSearchKey",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mockSearchValue",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mockedBody",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mockedHttpCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "mockedTime",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20181206153929",
+    "entityTableName": "cm_mock",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

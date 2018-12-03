@@ -1,0 +1,98 @@
+{
+    "name": "CmRequest",
+    "fields": [
+        {
+            "fieldName": "requestId",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "requestUuid",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "serviceName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "serviceEndpoint",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "instanceHostname",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "instancePort",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "requestBody",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "requestHeader",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "responseBody",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "responseHeader",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "returnHttpCode",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "technicalStatus",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "functionalStatus",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "startDateTime",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "endDateTime",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "requestDuration",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "action",
+            "otherEntityName": "cmAction",
+            "otherEntityRelationshipName": "request"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "context",
+            "otherEntityName": "cmContext",
+            "otherEntityRelationshipName": "request"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "error",
+            "otherEntityName": "cmError",
+            "otherEntityRelationshipName": "request"
+        }
+    ],
+    "changelogDate": "20181206153928",
+    "entityTableName": "cm_request",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": true,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

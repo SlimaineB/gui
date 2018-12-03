@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="cmMock">
+            <h2><span jhiTranslate="cashManagementUiApp.cmMock.detail.title">Cm Mock</span> {{cmMock.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cashManagementUiApp.cmMock.mockId">Mock Id</span></dt>
+                <dd>
+                    <span>{{cmMock.mockId}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmMock.mockServiceName">Mock Service Name</span></dt>
+                <dd>
+                    <span>{{cmMock.mockServiceName}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmMock.mockSearchKey">Mock Search Key</span></dt>
+                <dd>
+                    <span>{{cmMock.mockSearchKey}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmMock.mockSearchValue">Mock Search Value</span></dt>
+                <dd>
+                    <span>{{cmMock.mockSearchValue}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmMock.mockedBody">Mocked Body</span></dt>
+                <dd>
+                    <span>{{cmMock.mockedBody}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmMock.mockedHttpCode">Mocked Http Code</span></dt>
+                <dd>
+                    <span>{{cmMock.mockedHttpCode}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmMock.mockedTime">Mocked Time</span></dt>
+                <dd>
+                    <span>{{cmMock.mockedTime}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/cm-mock', cmMock.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

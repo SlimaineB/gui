@@ -1,0 +1,49 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="cmContext">
+            <h2><span jhiTranslate="cashManagementUiApp.cmContext.detail.title">Cm Context</span> {{cmContext.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="cashManagementUiApp.cmContext.contextId">Context Id</span></dt>
+                <dd>
+                    <span>{{cmContext.contextId}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmContext.contextType">Context Type</span></dt>
+                <dd>
+                    <span>{{cmContext.contextType}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmContext.contextName">Context Name</span></dt>
+                <dd>
+                    <span>{{cmContext.contextName}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmContext.contextValue">Context Value</span></dt>
+                <dd>
+                    <span>{{cmContext.contextValue}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmContext.contextDateTime">Context Date Time</span></dt>
+                <dd>
+                    <span>{{cmContext.contextDateTime}}</span>
+                </dd>
+                <dt><span jhiTranslate="cashManagementUiApp.cmContext.request">Request</span></dt>
+                <dd>
+                    <div *ngIf="cmContext.request">
+                        <a [routerLink]="['/cm-request', cmContext.request?.id, 'view']">{{cmContext.request?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/cm-context', cmContext.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
