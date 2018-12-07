@@ -9,7 +9,7 @@ import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { CmRequestService } from './cm-request.service';
-import { NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTimeStruct, NgbCalendar, NgbDateStruct, NgbDate } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
     selector: 'jhi-cm-request',
@@ -30,9 +30,13 @@ export class CmRequestComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
-    beginStartTime: NgbTimeStruct;
-    endStartTime: NgbTimeStruct;
+    startTime: NgbTimeStruct;
+    endTime: NgbTimeStruct;
+    startDate: NgbDateStruct;
+    endDate: NgbDateStruct;
     spinners = false;
+    model: NgbDateStruct;
+    date: { year: number; month: number };
 
     constructor(
         private cmRequestService: CmRequestService,
@@ -41,7 +45,8 @@ export class CmRequestComponent implements OnInit, OnDestroy {
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager
+        private eventManager: JhiEventManager,
+        private calendar: NgbCalendar
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -54,6 +59,9 @@ export class CmRequestComponent implements OnInit, OnDestroy {
 
     toggleSpinners() {
         this.spinners = !this.spinners;
+    }
+    selectToday() {
+        this.model = this.calendar.getToday();
     }
 
     loadAll() {
@@ -100,8 +108,11 @@ export class CmRequestComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.beginStartTime = {hour: 0, minute: 0, second: 0};
-        this.endStartTime = {hour: 23, minute: 59, second: 59};
+        this.startTime = { hour: 0, minute: 0, second: 0 };
+        this.endTime = { hour: 23, minute: 59, second: 59 };
+        this.startDate = this.calendar.getToday();
+        this.endDate = this.calendar.getToday();
+        console.log(this.startDate);
         this.loadAll();
         this.principal.identity().then(account => {
             this.currentAccount = account;
