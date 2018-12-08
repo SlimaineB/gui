@@ -2,10 +2,6 @@
     "name": "CmMock",
     "fields": [
         {
-            "fieldName": "mockId",
-            "fieldType": "Long"
-        },
-        {
             "fieldName": "mockServiceName",
             "fieldType": "Integer"
         },

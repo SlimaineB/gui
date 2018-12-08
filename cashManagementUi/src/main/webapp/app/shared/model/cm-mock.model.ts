@@ -1,6 +1,5 @@
 export interface ICmMock {
     id?: number;
-    mockId?: number;
     mockServiceName?: number;
     mockSearchKey?: string;
     mockSearchValue?: string;
@@ -12,7 +11,6 @@ export interface ICmMock {
 export class CmMock implements ICmMock {
     constructor(
         public id?: number,
-        public mockId?: number,
         public mockServiceName?: number,
         public mockSearchKey?: string,
         public mockSearchValue?: string,

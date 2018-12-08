@@ -3,7 +3,6 @@ import { ICmRequest } from 'app/shared/model//cm-request.model';
 
 export interface ICmAction {
     id?: number;
-    actionId?: number;
     actionNum?: number;
     actionType?: string;
     actionDescription?: string;
@@ -17,7 +16,6 @@ export interface ICmAction {
 export class CmAction implements ICmAction {
     constructor(
         public id?: number,
-        public actionId?: number,
         public actionNum?: number,
         public actionType?: string,
         public actionDescription?: string,

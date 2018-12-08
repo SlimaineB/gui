@@ -47,9 +47,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = CashManagementUiApp.class)
 public class CmRequestResourceIntTest {
 
-    private static final Long DEFAULT_REQUEST_ID = 1L;
-    private static final Long UPDATED_REQUEST_ID = 2L;
-
     private static final String DEFAULT_REQUEST_UUID = "AAAAAAAAAA";
     private static final String UPDATED_REQUEST_UUID = "BBBBBBBBBB";
 
@@ -59,8 +56,8 @@ public class CmRequestResourceIntTest {
     private static final String DEFAULT_SERVICE_ENDPOINT = "AAAAAAAAAA";
     private static final String UPDATED_SERVICE_ENDPOINT = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_INSTANCE_HOSTNAME = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_INSTANCE_HOSTNAME = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final String DEFAULT_INSTANCE_HOSTNAME = "AAAAAAAAAA";
+    private static final String UPDATED_INSTANCE_HOSTNAME = "BBBBBBBBBB";
 
     private static final Integer DEFAULT_INSTANCE_PORT = 1;
     private static final Integer UPDATED_INSTANCE_PORT = 2;
@@ -139,7 +136,6 @@ public class CmRequestResourceIntTest {
      */
     public static CmRequest createEntity(EntityManager em) {
         CmRequest cmRequest = new CmRequest()
-            .requestId(DEFAULT_REQUEST_ID)
             .requestUuid(DEFAULT_REQUEST_UUID)
             .serviceName(DEFAULT_SERVICE_NAME)
             .serviceEndpoint(DEFAULT_SERVICE_ENDPOINT)
@@ -178,7 +174,6 @@ public class CmRequestResourceIntTest {
         List<CmRequest> cmRequestList = cmRequestRepository.findAll();
         assertThat(cmRequestList).hasSize(databaseSizeBeforeCreate + 1);
         CmRequest testCmRequest = cmRequestList.get(cmRequestList.size() - 1);
-        assertThat(testCmRequest.getRequestId()).isEqualTo(DEFAULT_REQUEST_ID);
         assertThat(testCmRequest.getRequestUuid()).isEqualTo(DEFAULT_REQUEST_UUID);
         assertThat(testCmRequest.getServiceName()).isEqualTo(DEFAULT_SERVICE_NAME);
         assertThat(testCmRequest.getServiceEndpoint()).isEqualTo(DEFAULT_SERVICE_ENDPOINT);
@@ -226,7 +221,6 @@ public class CmRequestResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(cmRequest.getId().intValue())))
-            .andExpect(jsonPath("$.[*].requestId").value(hasItem(DEFAULT_REQUEST_ID.intValue())))
             .andExpect(jsonPath("$.[*].requestUuid").value(hasItem(DEFAULT_REQUEST_UUID.toString())))
             .andExpect(jsonPath("$.[*].serviceName").value(hasItem(DEFAULT_SERVICE_NAME.toString())))
             .andExpect(jsonPath("$.[*].serviceEndpoint").value(hasItem(DEFAULT_SERVICE_ENDPOINT.toString())))
@@ -255,7 +249,6 @@ public class CmRequestResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(cmRequest.getId().intValue()))
-            .andExpect(jsonPath("$.requestId").value(DEFAULT_REQUEST_ID.intValue()))
             .andExpect(jsonPath("$.requestUuid").value(DEFAULT_REQUEST_UUID.toString()))
             .andExpect(jsonPath("$.serviceName").value(DEFAULT_SERVICE_NAME.toString()))
             .andExpect(jsonPath("$.serviceEndpoint").value(DEFAULT_SERVICE_ENDPOINT.toString()))
@@ -272,72 +265,6 @@ public class CmRequestResourceIntTest {
             .andExpect(jsonPath("$.endDateTime").value(DEFAULT_END_DATE_TIME.toString()))
             .andExpect(jsonPath("$.requestDuration").value(DEFAULT_REQUEST_DURATION));
     }
-
-    @Test
-    @Transactional
-    public void getAllCmRequestsByRequestIdIsEqualToSomething() throws Exception {
-        // Initialize the database
-        cmRequestRepository.saveAndFlush(cmRequest);
-
-        // Get all the cmRequestList where requestId equals to DEFAULT_REQUEST_ID
-        defaultCmRequestShouldBeFound("requestId.equals=" + DEFAULT_REQUEST_ID);
-
-        // Get all the cmRequestList where requestId equals to UPDATED_REQUEST_ID
-        defaultCmRequestShouldNotBeFound("requestId.equals=" + UPDATED_REQUEST_ID);
-    }
-
-    @Test
-    @Transactional
-    public void getAllCmRequestsByRequestIdIsInShouldWork() throws Exception {
-        // Initialize the database
-        cmRequestRepository.saveAndFlush(cmRequest);
-
-        // Get all the cmRequestList where requestId in DEFAULT_REQUEST_ID or UPDATED_REQUEST_ID
-        defaultCmRequestShouldBeFound("requestId.in=" + DEFAULT_REQUEST_ID + "," + UPDATED_REQUEST_ID);
-
-        // Get all the cmRequestList where requestId equals to UPDATED_REQUEST_ID
-        defaultCmRequestShouldNotBeFound("requestId.in=" + UPDATED_REQUEST_ID);
-    }
-
-    @Test
-    @Transactional
-    public void getAllCmRequestsByRequestIdIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        cmRequestRepository.saveAndFlush(cmRequest);
-
-        // Get all the cmRequestList where requestId is not null
-        defaultCmRequestShouldBeFound("requestId.specified=true");
-
-        // Get all the cmRequestList where requestId is null
-        defaultCmRequestShouldNotBeFound("requestId.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllCmRequestsByRequestIdIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        cmRequestRepository.saveAndFlush(cmRequest);
-
-        // Get all the cmRequestList where requestId greater than or equals to DEFAULT_REQUEST_ID
-        defaultCmRequestShouldBeFound("requestId.greaterOrEqualThan=" + DEFAULT_REQUEST_ID);
-
-        // Get all the cmRequestList where requestId greater than or equals to UPDATED_REQUEST_ID
-        defaultCmRequestShouldNotBeFound("requestId.greaterOrEqualThan=" + UPDATED_REQUEST_ID);
-    }
-
-    @Test
-    @Transactional
-    public void getAllCmRequestsByRequestIdIsLessThanSomething() throws Exception {
-        // Initialize the database
-        cmRequestRepository.saveAndFlush(cmRequest);
-
-        // Get all the cmRequestList where requestId less than or equals to DEFAULT_REQUEST_ID
-        defaultCmRequestShouldNotBeFound("requestId.lessThan=" + DEFAULT_REQUEST_ID);
-
-        // Get all the cmRequestList where requestId less than or equals to UPDATED_REQUEST_ID
-        defaultCmRequestShouldBeFound("requestId.lessThan=" + UPDATED_REQUEST_ID);
-    }
-
 
     @Test
     @Transactional
@@ -1069,7 +996,6 @@ public class CmRequestResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(cmRequest.getId().intValue())))
-            .andExpect(jsonPath("$.[*].requestId").value(hasItem(DEFAULT_REQUEST_ID.intValue())))
             .andExpect(jsonPath("$.[*].requestUuid").value(hasItem(DEFAULT_REQUEST_UUID.toString())))
             .andExpect(jsonPath("$.[*].serviceName").value(hasItem(DEFAULT_SERVICE_NAME.toString())))
             .andExpect(jsonPath("$.[*].serviceEndpoint").value(hasItem(DEFAULT_SERVICE_ENDPOINT.toString())))
@@ -1132,7 +1058,6 @@ public class CmRequestResourceIntTest {
         // Disconnect from session so that the updates on updatedCmRequest are not directly saved in db
         em.detach(updatedCmRequest);
         updatedCmRequest
-            .requestId(UPDATED_REQUEST_ID)
             .requestUuid(UPDATED_REQUEST_UUID)
             .serviceName(UPDATED_SERVICE_NAME)
             .serviceEndpoint(UPDATED_SERVICE_ENDPOINT)
@@ -1158,7 +1083,6 @@ public class CmRequestResourceIntTest {
         List<CmRequest> cmRequestList = cmRequestRepository.findAll();
         assertThat(cmRequestList).hasSize(databaseSizeBeforeUpdate);
         CmRequest testCmRequest = cmRequestList.get(cmRequestList.size() - 1);
-        assertThat(testCmRequest.getRequestId()).isEqualTo(UPDATED_REQUEST_ID);
         assertThat(testCmRequest.getRequestUuid()).isEqualTo(UPDATED_REQUEST_UUID);
         assertThat(testCmRequest.getServiceName()).isEqualTo(UPDATED_SERVICE_NAME);
         assertThat(testCmRequest.getServiceEndpoint()).isEqualTo(UPDATED_SERVICE_ENDPOINT);

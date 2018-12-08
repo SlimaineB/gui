@@ -3,7 +3,6 @@ import { ICmRequest } from 'app/shared/model//cm-request.model';
 
 export interface ICmError {
     id?: number;
-    errorId?: number;
     errorComponent?: number;
     errorCode?: string;
     errorDescription?: string;
@@ -15,7 +14,6 @@ export interface ICmError {
 export class CmError implements ICmError {
     constructor(
         public id?: number,
-        public errorId?: number,
         public errorComponent?: number,
         public errorCode?: string,
         public errorDescription?: string,

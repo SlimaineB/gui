@@ -24,9 +24,6 @@ public class CmError implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "error_id")
-    private Long errorId;
-
     @Column(name = "error_component")
     private Integer errorComponent;
 
@@ -53,19 +50,6 @@ public class CmError implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getErrorId() {
-        return errorId;
-    }
-
-    public CmError errorId(Long errorId) {
-        this.errorId = errorId;
-        return this;
-    }
-
-    public void setErrorId(Long errorId) {
-        this.errorId = errorId;
     }
 
     public Integer getErrorComponent() {
@@ -171,7 +155,6 @@ public class CmError implements Serializable {
     public String toString() {
         return "CmError{" +
             "id=" + getId() +
-            ", errorId=" + getErrorId() +
             ", errorComponent=" + getErrorComponent() +
             ", errorCode='" + getErrorCode() + "'" +
             ", errorDescription='" + getErrorDescription() + "'" +

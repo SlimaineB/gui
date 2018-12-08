@@ -45,9 +45,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = CashManagementUiApp.class)
 public class CmContextResourceIntTest {
 
-    private static final Long DEFAULT_CONTEXT_ID = 1L;
-    private static final Long UPDATED_CONTEXT_ID = 2L;
-
     private static final Integer DEFAULT_CONTEXT_TYPE = 1;
     private static final Integer UPDATED_CONTEXT_TYPE = 2;
 
@@ -104,7 +101,6 @@ public class CmContextResourceIntTest {
      */
     public static CmContext createEntity(EntityManager em) {
         CmContext cmContext = new CmContext()
-            .contextId(DEFAULT_CONTEXT_ID)
             .contextType(DEFAULT_CONTEXT_TYPE)
             .contextName(DEFAULT_CONTEXT_NAME)
             .contextValue(DEFAULT_CONTEXT_VALUE)
@@ -132,7 +128,6 @@ public class CmContextResourceIntTest {
         List<CmContext> cmContextList = cmContextRepository.findAll();
         assertThat(cmContextList).hasSize(databaseSizeBeforeCreate + 1);
         CmContext testCmContext = cmContextList.get(cmContextList.size() - 1);
-        assertThat(testCmContext.getContextId()).isEqualTo(DEFAULT_CONTEXT_ID);
         assertThat(testCmContext.getContextType()).isEqualTo(DEFAULT_CONTEXT_TYPE);
         assertThat(testCmContext.getContextName()).isEqualTo(DEFAULT_CONTEXT_NAME);
         assertThat(testCmContext.getContextValue()).isEqualTo(DEFAULT_CONTEXT_VALUE);
@@ -169,7 +164,6 @@ public class CmContextResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(cmContext.getId().intValue())))
-            .andExpect(jsonPath("$.[*].contextId").value(hasItem(DEFAULT_CONTEXT_ID.intValue())))
             .andExpect(jsonPath("$.[*].contextType").value(hasItem(DEFAULT_CONTEXT_TYPE)))
             .andExpect(jsonPath("$.[*].contextName").value(hasItem(DEFAULT_CONTEXT_NAME.toString())))
             .andExpect(jsonPath("$.[*].contextValue").value(hasItem(DEFAULT_CONTEXT_VALUE.toString())))
@@ -187,78 +181,11 @@ public class CmContextResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(cmContext.getId().intValue()))
-            .andExpect(jsonPath("$.contextId").value(DEFAULT_CONTEXT_ID.intValue()))
             .andExpect(jsonPath("$.contextType").value(DEFAULT_CONTEXT_TYPE))
             .andExpect(jsonPath("$.contextName").value(DEFAULT_CONTEXT_NAME.toString()))
             .andExpect(jsonPath("$.contextValue").value(DEFAULT_CONTEXT_VALUE.toString()))
             .andExpect(jsonPath("$.contextDateTime").value(DEFAULT_CONTEXT_DATE_TIME.toString()));
     }
-
-    @Test
-    @Transactional
-    public void getAllCmContextsByContextIdIsEqualToSomething() throws Exception {
-        // Initialize the database
-        cmContextRepository.saveAndFlush(cmContext);
-
-        // Get all the cmContextList where contextId equals to DEFAULT_CONTEXT_ID
-        defaultCmContextShouldBeFound("contextId.equals=" + DEFAULT_CONTEXT_ID);
-
-        // Get all the cmContextList where contextId equals to UPDATED_CONTEXT_ID
-        defaultCmContextShouldNotBeFound("contextId.equals=" + UPDATED_CONTEXT_ID);
-    }
-
-    @Test
-    @Transactional
-    public void getAllCmContextsByContextIdIsInShouldWork() throws Exception {
-        // Initialize the database
-        cmContextRepository.saveAndFlush(cmContext);
-
-        // Get all the cmContextList where contextId in DEFAULT_CONTEXT_ID or UPDATED_CONTEXT_ID
-        defaultCmContextShouldBeFound("contextId.in=" + DEFAULT_CONTEXT_ID + "," + UPDATED_CONTEXT_ID);
-
-        // Get all the cmContextList where contextId equals to UPDATED_CONTEXT_ID
-        defaultCmContextShouldNotBeFound("contextId.in=" + UPDATED_CONTEXT_ID);
-    }
-
-    @Test
-    @Transactional
-    public void getAllCmContextsByContextIdIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        cmContextRepository.saveAndFlush(cmContext);
-
-        // Get all the cmContextList where contextId is not null
-        defaultCmContextShouldBeFound("contextId.specified=true");
-
-        // Get all the cmContextList where contextId is null
-        defaultCmContextShouldNotBeFound("contextId.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllCmContextsByContextIdIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        cmContextRepository.saveAndFlush(cmContext);
-
-        // Get all the cmContextList where contextId greater than or equals to DEFAULT_CONTEXT_ID
-        defaultCmContextShouldBeFound("contextId.greaterOrEqualThan=" + DEFAULT_CONTEXT_ID);
-
-        // Get all the cmContextList where contextId greater than or equals to UPDATED_CONTEXT_ID
-        defaultCmContextShouldNotBeFound("contextId.greaterOrEqualThan=" + UPDATED_CONTEXT_ID);
-    }
-
-    @Test
-    @Transactional
-    public void getAllCmContextsByContextIdIsLessThanSomething() throws Exception {
-        // Initialize the database
-        cmContextRepository.saveAndFlush(cmContext);
-
-        // Get all the cmContextList where contextId less than or equals to DEFAULT_CONTEXT_ID
-        defaultCmContextShouldNotBeFound("contextId.lessThan=" + DEFAULT_CONTEXT_ID);
-
-        // Get all the cmContextList where contextId less than or equals to UPDATED_CONTEXT_ID
-        defaultCmContextShouldBeFound("contextId.lessThan=" + UPDATED_CONTEXT_ID);
-    }
-
 
     @Test
     @Transactional
@@ -469,7 +396,6 @@ public class CmContextResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(cmContext.getId().intValue())))
-            .andExpect(jsonPath("$.[*].contextId").value(hasItem(DEFAULT_CONTEXT_ID.intValue())))
             .andExpect(jsonPath("$.[*].contextType").value(hasItem(DEFAULT_CONTEXT_TYPE)))
             .andExpect(jsonPath("$.[*].contextName").value(hasItem(DEFAULT_CONTEXT_NAME.toString())))
             .andExpect(jsonPath("$.[*].contextValue").value(hasItem(DEFAULT_CONTEXT_VALUE.toString())))
@@ -521,7 +447,6 @@ public class CmContextResourceIntTest {
         // Disconnect from session so that the updates on updatedCmContext are not directly saved in db
         em.detach(updatedCmContext);
         updatedCmContext
-            .contextId(UPDATED_CONTEXT_ID)
             .contextType(UPDATED_CONTEXT_TYPE)
             .contextName(UPDATED_CONTEXT_NAME)
             .contextValue(UPDATED_CONTEXT_VALUE)
@@ -536,7 +461,6 @@ public class CmContextResourceIntTest {
         List<CmContext> cmContextList = cmContextRepository.findAll();
         assertThat(cmContextList).hasSize(databaseSizeBeforeUpdate);
         CmContext testCmContext = cmContextList.get(cmContextList.size() - 1);
-        assertThat(testCmContext.getContextId()).isEqualTo(UPDATED_CONTEXT_ID);
         assertThat(testCmContext.getContextType()).isEqualTo(UPDATED_CONTEXT_TYPE);
         assertThat(testCmContext.getContextName()).isEqualTo(UPDATED_CONTEXT_NAME);
         assertThat(testCmContext.getContextValue()).isEqualTo(UPDATED_CONTEXT_VALUE);

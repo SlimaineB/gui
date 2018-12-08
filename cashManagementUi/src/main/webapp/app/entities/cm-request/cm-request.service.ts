@@ -51,8 +51,6 @@ export class CmRequestService {
 
     protected convertDateFromClient(cmRequest: ICmRequest): ICmRequest {
         const copy: ICmRequest = Object.assign({}, cmRequest, {
-            instanceHostname:
-                cmRequest.instanceHostname != null && cmRequest.instanceHostname.isValid() ? cmRequest.instanceHostname.toJSON() : null,
             startDateTime: cmRequest.startDateTime != null && cmRequest.startDateTime.isValid() ? cmRequest.startDateTime.toJSON() : null,
             endDateTime: cmRequest.endDateTime != null && cmRequest.endDateTime.isValid() ? cmRequest.endDateTime.toJSON() : null
         });
@@ -61,7 +59,6 @@ export class CmRequestService {
 
     protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
         if (res.body) {
-            res.body.instanceHostname = res.body.instanceHostname != null ? moment(res.body.instanceHostname) : null;
             res.body.startDateTime = res.body.startDateTime != null ? moment(res.body.startDateTime) : null;
             res.body.endDateTime = res.body.endDateTime != null ? moment(res.body.endDateTime) : null;
         }
@@ -71,7 +68,6 @@ export class CmRequestService {
     protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
         if (res.body) {
             res.body.forEach((cmRequest: ICmRequest) => {
-                cmRequest.instanceHostname = cmRequest.instanceHostname != null ? moment(cmRequest.instanceHostname) : null;
                 cmRequest.startDateTime = cmRequest.startDateTime != null ? moment(cmRequest.startDateTime) : null;
                 cmRequest.endDateTime = cmRequest.endDateTime != null ? moment(cmRequest.endDateTime) : null;
             });

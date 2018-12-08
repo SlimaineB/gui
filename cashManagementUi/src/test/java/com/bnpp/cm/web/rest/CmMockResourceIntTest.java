@@ -42,9 +42,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = CashManagementUiApp.class)
 public class CmMockResourceIntTest {
 
-    private static final Long DEFAULT_MOCK_ID = 1L;
-    private static final Long UPDATED_MOCK_ID = 2L;
-
     private static final Integer DEFAULT_MOCK_SERVICE_NAME = 1;
     private static final Integer UPDATED_MOCK_SERVICE_NAME = 2;
 
@@ -107,7 +104,6 @@ public class CmMockResourceIntTest {
      */
     public static CmMock createEntity(EntityManager em) {
         CmMock cmMock = new CmMock()
-            .mockId(DEFAULT_MOCK_ID)
             .mockServiceName(DEFAULT_MOCK_SERVICE_NAME)
             .mockSearchKey(DEFAULT_MOCK_SEARCH_KEY)
             .mockSearchValue(DEFAULT_MOCK_SEARCH_VALUE)
@@ -137,7 +133,6 @@ public class CmMockResourceIntTest {
         List<CmMock> cmMockList = cmMockRepository.findAll();
         assertThat(cmMockList).hasSize(databaseSizeBeforeCreate + 1);
         CmMock testCmMock = cmMockList.get(cmMockList.size() - 1);
-        assertThat(testCmMock.getMockId()).isEqualTo(DEFAULT_MOCK_ID);
         assertThat(testCmMock.getMockServiceName()).isEqualTo(DEFAULT_MOCK_SERVICE_NAME);
         assertThat(testCmMock.getMockSearchKey()).isEqualTo(DEFAULT_MOCK_SEARCH_KEY);
         assertThat(testCmMock.getMockSearchValue()).isEqualTo(DEFAULT_MOCK_SEARCH_VALUE);
@@ -176,7 +171,6 @@ public class CmMockResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(cmMock.getId().intValue())))
-            .andExpect(jsonPath("$.[*].mockId").value(hasItem(DEFAULT_MOCK_ID.intValue())))
             .andExpect(jsonPath("$.[*].mockServiceName").value(hasItem(DEFAULT_MOCK_SERVICE_NAME)))
             .andExpect(jsonPath("$.[*].mockSearchKey").value(hasItem(DEFAULT_MOCK_SEARCH_KEY.toString())))
             .andExpect(jsonPath("$.[*].mockSearchValue").value(hasItem(DEFAULT_MOCK_SEARCH_VALUE.toString())))
@@ -196,7 +190,6 @@ public class CmMockResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(cmMock.getId().intValue()))
-            .andExpect(jsonPath("$.mockId").value(DEFAULT_MOCK_ID.intValue()))
             .andExpect(jsonPath("$.mockServiceName").value(DEFAULT_MOCK_SERVICE_NAME))
             .andExpect(jsonPath("$.mockSearchKey").value(DEFAULT_MOCK_SEARCH_KEY.toString()))
             .andExpect(jsonPath("$.mockSearchValue").value(DEFAULT_MOCK_SEARCH_VALUE.toString()))
@@ -204,72 +197,6 @@ public class CmMockResourceIntTest {
             .andExpect(jsonPath("$.mockedHttpCode").value(DEFAULT_MOCKED_HTTP_CODE.toString()))
             .andExpect(jsonPath("$.mockedTime").value(DEFAULT_MOCKED_TIME));
     }
-
-    @Test
-    @Transactional
-    public void getAllCmMocksByMockIdIsEqualToSomething() throws Exception {
-        // Initialize the database
-        cmMockRepository.saveAndFlush(cmMock);
-
-        // Get all the cmMockList where mockId equals to DEFAULT_MOCK_ID
-        defaultCmMockShouldBeFound("mockId.equals=" + DEFAULT_MOCK_ID);
-
-        // Get all the cmMockList where mockId equals to UPDATED_MOCK_ID
-        defaultCmMockShouldNotBeFound("mockId.equals=" + UPDATED_MOCK_ID);
-    }
-
-    @Test
-    @Transactional
-    public void getAllCmMocksByMockIdIsInShouldWork() throws Exception {
-        // Initialize the database
-        cmMockRepository.saveAndFlush(cmMock);
-
-        // Get all the cmMockList where mockId in DEFAULT_MOCK_ID or UPDATED_MOCK_ID
-        defaultCmMockShouldBeFound("mockId.in=" + DEFAULT_MOCK_ID + "," + UPDATED_MOCK_ID);
-
-        // Get all the cmMockList where mockId equals to UPDATED_MOCK_ID
-        defaultCmMockShouldNotBeFound("mockId.in=" + UPDATED_MOCK_ID);
-    }
-
-    @Test
-    @Transactional
-    public void getAllCmMocksByMockIdIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        cmMockRepository.saveAndFlush(cmMock);
-
-        // Get all the cmMockList where mockId is not null
-        defaultCmMockShouldBeFound("mockId.specified=true");
-
-        // Get all the cmMockList where mockId is null
-        defaultCmMockShouldNotBeFound("mockId.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllCmMocksByMockIdIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        cmMockRepository.saveAndFlush(cmMock);
-
-        // Get all the cmMockList where mockId greater than or equals to DEFAULT_MOCK_ID
-        defaultCmMockShouldBeFound("mockId.greaterOrEqualThan=" + DEFAULT_MOCK_ID);
-
-        // Get all the cmMockList where mockId greater than or equals to UPDATED_MOCK_ID
-        defaultCmMockShouldNotBeFound("mockId.greaterOrEqualThan=" + UPDATED_MOCK_ID);
-    }
-
-    @Test
-    @Transactional
-    public void getAllCmMocksByMockIdIsLessThanSomething() throws Exception {
-        // Initialize the database
-        cmMockRepository.saveAndFlush(cmMock);
-
-        // Get all the cmMockList where mockId less than or equals to DEFAULT_MOCK_ID
-        defaultCmMockShouldNotBeFound("mockId.lessThan=" + DEFAULT_MOCK_ID);
-
-        // Get all the cmMockList where mockId less than or equals to UPDATED_MOCK_ID
-        defaultCmMockShouldBeFound("mockId.lessThan=" + UPDATED_MOCK_ID);
-    }
-
 
     @Test
     @Transactional
@@ -566,7 +493,6 @@ public class CmMockResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(cmMock.getId().intValue())))
-            .andExpect(jsonPath("$.[*].mockId").value(hasItem(DEFAULT_MOCK_ID.intValue())))
             .andExpect(jsonPath("$.[*].mockServiceName").value(hasItem(DEFAULT_MOCK_SERVICE_NAME)))
             .andExpect(jsonPath("$.[*].mockSearchKey").value(hasItem(DEFAULT_MOCK_SEARCH_KEY.toString())))
             .andExpect(jsonPath("$.[*].mockSearchValue").value(hasItem(DEFAULT_MOCK_SEARCH_VALUE.toString())))
@@ -620,7 +546,6 @@ public class CmMockResourceIntTest {
         // Disconnect from session so that the updates on updatedCmMock are not directly saved in db
         em.detach(updatedCmMock);
         updatedCmMock
-            .mockId(UPDATED_MOCK_ID)
             .mockServiceName(UPDATED_MOCK_SERVICE_NAME)
             .mockSearchKey(UPDATED_MOCK_SEARCH_KEY)
             .mockSearchValue(UPDATED_MOCK_SEARCH_VALUE)
@@ -637,7 +562,6 @@ public class CmMockResourceIntTest {
         List<CmMock> cmMockList = cmMockRepository.findAll();
         assertThat(cmMockList).hasSize(databaseSizeBeforeUpdate);
         CmMock testCmMock = cmMockList.get(cmMockList.size() - 1);
-        assertThat(testCmMock.getMockId()).isEqualTo(UPDATED_MOCK_ID);
         assertThat(testCmMock.getMockServiceName()).isEqualTo(UPDATED_MOCK_SERVICE_NAME);
         assertThat(testCmMock.getMockSearchKey()).isEqualTo(UPDATED_MOCK_SEARCH_KEY);
         assertThat(testCmMock.getMockSearchValue()).isEqualTo(UPDATED_MOCK_SEARCH_VALUE);

@@ -10,42 +10,48 @@
     </h2>
     <jhi-alert></jhi-alert>
     <br/>
-    <form>
+    <form >
         <div class="form-row">
             <div class="form-group col-md-3">
-                <label for="inputEmail4">Service Name</label>
-                <input type="email" class="form-control" id="inputEmail4" placeholder="Service Name">
+                <label for="serviceNameInput">Service Name</label>
+                <input type="text" class="form-control" [(ngModel)]="serviceNameFilter" id="serviceNameInput" name="serviceNameFilter" placeholder="Service Name"/>
             </div>
             <div class="form-group col-md-2">
-                <label for="inputState">Status</label>
-                <select id="inputState" class="form-control">
+                <label for="statusFilter">Status</label>
+                <select id="statusFilter" class="form-control">
                     <option selected>Choose...</option>
                     <option>...</option>
                 </select>
             </div>
             <div class="form-group col-md-2" >
-                <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.startDateTime" for="field_startDateTime">Start Date Time</label>
+                <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.startDateTime" for="startDateTimeFilter">Start Date Time</label>
                 <div class="d-flex">
-                    <input id="field_startDateTime" type="datetime-local" class="form-control" name="startDateTime" [(ngModel)]="startDateTime"
+                    <input id="startDateTimeFilter" type="datetime-local" class="form-control" name="startDateTime" [(ngModel)]="startDateTime"
                     />
                 </div>
             </div>
             <div class="form-group col-md-2" >
-                <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.endDateTime" for="field_endDateTime">End Date Time</label>
+                <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.endDateTime" for="endDateTimeFilter">End Date Time</label>
                 <div class="d-flex">
-                    <input id="field_endDateTime" type="datetime-local" class="form-control" name="endDateTime" [(ngModel)]="endDateTime"
-                    />
+                    <input id="endDateTimeFilter" type="datetime-local" class="form-control" name="endDateTime" [(ngModel)]="endDateTime"/>
                 </div>
-            </div>            
-        </div>
+            </div>
+        </div>    
+        <div class="form-row">
+            <div class="form-group col-md-2" >
+                <button (click)="filter()" id="save-entity" class="btn btn-primary">
+                    <fa-icon [icon]="'search'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Search</span>
+                </button>
+            </div> 
+        </div>                              
     </form>
+    
     <div class="table-responsive" *ngIf="cmRequests">
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="requestId"><span jhiTranslate="cashManagementUiApp.cmRequest.requestId">Request Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="requestUuid"><span jhiTranslate="cashManagementUiApp.cmRequest.requestUuid">Request Uuid</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+             <th jhiSortBy="requestUuid"><span jhiTranslate="cashManagementUiApp.cmRequest.requestUuid">Request Uuid</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="serviceName"><span jhiTranslate="cashManagementUiApp.cmRequest.serviceName">Service Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="serviceEndpoint"><span jhiTranslate="cashManagementUiApp.cmRequest.serviceEndpoint">Service Endpoint</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="instanceHostname"><span jhiTranslate="cashManagementUiApp.cmRequest.instanceHostname">Instance Hostname</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -66,11 +72,10 @@
             <tbody>
             <tr *ngFor="let cmRequest of cmRequests ;trackBy: trackId">
                 <td><a [routerLink]="['/cm-request', cmRequest.id, 'view' ]">{{cmRequest.id}}</a></td>
-                <td>{{cmRequest.requestId}}</td>
                 <td>{{cmRequest.requestUuid}}</td>
                 <td>{{cmRequest.serviceName}}</td>
                 <td>{{cmRequest.serviceEndpoint}}</td>
-                <td>{{cmRequest.instanceHostname | date:'medium'}}</td>
+                <td>{{cmRequest.instanceHostname}}</td>
                 <td>{{cmRequest.instancePort}}</td>
                 <td>{{cmRequest.requestBody}}</td>
                 <td>{{cmRequest.requestHeader}}</td>

@@ -7,9 +7,9 @@ import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 import { ICmRequest } from 'app/shared/model/cm-request.model';
 import { Principal } from 'app/core';
 
-import { ITEMS_PER_PAGE } from 'app/shared';
+import { ITEMS_PER_PAGE, DATE_TIME_FORMAT } from 'app/shared';
 import { CmRequestService } from './cm-request.service';
-import { NgbTimeStruct, NgbCalendar, NgbDateStruct, NgbDate } from '@ng-bootstrap/ng-bootstrap';
+import moment = require('moment');
 
 @Component({
     selector: 'jhi-cm-request',
@@ -30,13 +30,9 @@ export class CmRequestComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
-    startTime: NgbTimeStruct;
-    endTime: NgbTimeStruct;
-    startDate: NgbDateStruct;
-    endDate: NgbDateStruct;
-    spinners = false;
-    model: NgbDateStruct;
-    date: { year: number; month: number };
+    startDateTime: string;
+    endDateTime: string;
+    serviceNameFilter: string;
 
     constructor(
         private cmRequestService: CmRequestService,
@@ -45,8 +41,7 @@ export class CmRequestComponent implements OnInit, OnDestroy {
         private principal: Principal,
         private activatedRoute: ActivatedRoute,
         private router: Router,
-        private eventManager: JhiEventManager,
-        private calendar: NgbCalendar
+        private eventManager: JhiEventManager
     ) {
         this.itemsPerPage = ITEMS_PER_PAGE;
         this.routeData = this.activatedRoute.data.subscribe(data => {
@@ -57,11 +52,39 @@ export class CmRequestComponent implements OnInit, OnDestroy {
         });
     }
 
-    toggleSpinners() {
-        this.spinners = !this.spinners;
-    }
-    selectToday() {
-        this.model = this.calendar.getToday();
+    filter() {
+        const endDateTimeFormated = this.endDateTime != null ? moment(this.endDateTime, DATE_TIME_FORMAT) : null;
+
+        let parameters: Object = {
+            page: this.page - 1,
+            size: this.itemsPerPage,
+            sort: this.sort()
+        };
+
+        if (this.serviceNameFilter != null) {
+            parameters['serviceName.contains'] = this.serviceNameFilter;
+        }
+
+        if (this.startDateTime != null) {
+            let startDateTimeFormated = moment(this.startDateTime, DATE_TIME_FORMAT);
+            if (startDateTimeFormated.isValid()) {
+                parameters['startDateTime.greaterOrEqualThan'] = startDateTimeFormated.toJSON();
+            }
+        }
+
+        if (this.endDateTime != null) {
+            let endDateTimeFormated = moment(this.endDateTime, DATE_TIME_FORMAT);
+            if (endDateTimeFormated.isValid()) {
+                parameters['endDateTime.lessOrEqualThan'] = endDateTimeFormated.toJSON();
+            }
+        }
+
+        this.cmRequestService
+            .query(parameters)
+            .subscribe(
+                (res: HttpResponse<ICmRequest[]>) => this.paginateCmRequests(res.body, res.headers),
+                (res: HttpErrorResponse) => this.onError(res.message)
+            );
     }
 
     loadAll() {
@@ -108,11 +131,6 @@ export class CmRequestComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.startTime = { hour: 0, minute: 0, second: 0 };
-        this.endTime = { hour: 23, minute: 59, second: 59 };
-        this.startDate = this.calendar.getToday();
-        this.endDate = this.calendar.getToday();
-        console.log(this.startDate);
         this.loadAll();
         this.principal.identity().then(account => {
             this.currentAccount = account;

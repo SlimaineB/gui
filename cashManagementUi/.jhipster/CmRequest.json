@@ -2,10 +2,6 @@
     "name": "CmRequest",
     "fields": [
         {
-            "fieldName": "requestId",
-            "fieldType": "Long"
-        },
-        {
             "fieldName": "requestUuid",
             "fieldType": "String"
         },
@@ -19,7 +15,7 @@
         },
         {
             "fieldName": "instanceHostname",
-            "fieldType": "Instant"
+            "fieldType": "String"
         },
         {
             "fieldName": "instancePort",

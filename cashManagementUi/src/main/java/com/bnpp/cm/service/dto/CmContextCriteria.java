@@ -25,8 +25,6 @@ public class CmContextCriteria implements Serializable {
 
     private LongFilter id;
 
-    private LongFilter contextId;
-
     private IntegerFilter contextType;
 
     private StringFilter contextName;
@@ -46,14 +44,6 @@ public class CmContextCriteria implements Serializable {
 
     public void setId(LongFilter id) {
         this.id = id;
-    }
-
-    public LongFilter getContextId() {
-        return contextId;
-    }
-
-    public void setContextId(LongFilter contextId) {
-        this.contextId = contextId;
     }
 
     public IntegerFilter getContextType() {
@@ -108,7 +98,6 @@ public class CmContextCriteria implements Serializable {
         final CmContextCriteria that = (CmContextCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(contextId, that.contextId) &&
             Objects.equals(contextType, that.contextType) &&
             Objects.equals(contextName, that.contextName) &&
             Objects.equals(contextValue, that.contextValue) &&
@@ -120,7 +109,6 @@ public class CmContextCriteria implements Serializable {
     public int hashCode() {
         return Objects.hash(
         id,
-        contextId,
         contextType,
         contextName,
         contextValue,
@@ -133,7 +121,6 @@ public class CmContextCriteria implements Serializable {
     public String toString() {
         return "CmContextCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (contextId != null ? "contextId=" + contextId + ", " : "") +
                 (contextType != null ? "contextType=" + contextType + ", " : "") +
                 (contextName != null ? "contextName=" + contextName + ", " : "") +
                 (contextValue != null ? "contextValue=" + contextValue + ", " : "") +

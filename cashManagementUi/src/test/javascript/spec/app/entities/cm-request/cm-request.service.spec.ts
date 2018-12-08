@@ -27,11 +27,10 @@ describe('Service Tests', () => {
 
             elemDefault = new CmRequest(
                 0,
-                0,
                 'AAAAAAA',
                 'AAAAAAA',
                 'AAAAAAA',
-                currentDate,
+                'AAAAAAA',
                 0,
                 'AAAAAAA',
                 'AAAAAAA',
@@ -50,7 +49,6 @@ describe('Service Tests', () => {
             it('should find an element', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        instanceHostname: currentDate.format(DATE_TIME_FORMAT),
                         startDateTime: currentDate.format(DATE_TIME_FORMAT),
                         endDateTime: currentDate.format(DATE_TIME_FORMAT)
                     },
@@ -69,7 +67,6 @@ describe('Service Tests', () => {
                 const returnedFromService = Object.assign(
                     {
                         id: 0,
-                        instanceHostname: currentDate.format(DATE_TIME_FORMAT),
                         startDateTime: currentDate.format(DATE_TIME_FORMAT),
                         endDateTime: currentDate.format(DATE_TIME_FORMAT)
                     },
@@ -77,7 +74,6 @@ describe('Service Tests', () => {
                 );
                 const expected = Object.assign(
                     {
-                        instanceHostname: currentDate,
                         startDateTime: currentDate,
                         endDateTime: currentDate
                     },
@@ -94,11 +90,10 @@ describe('Service Tests', () => {
             it('should update a CmRequest', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        requestId: 1,
                         requestUuid: 'BBBBBB',
                         serviceName: 'BBBBBB',
                         serviceEndpoint: 'BBBBBB',
-                        instanceHostname: currentDate.format(DATE_TIME_FORMAT),
+                        instanceHostname: 'BBBBBB',
                         instancePort: 1,
                         requestBody: 'BBBBBB',
                         requestHeader: 'BBBBBB',
@@ -116,7 +111,6 @@ describe('Service Tests', () => {
 
                 const expected = Object.assign(
                     {
-                        instanceHostname: currentDate,
                         startDateTime: currentDate,
                         endDateTime: currentDate
                     },
@@ -133,11 +127,10 @@ describe('Service Tests', () => {
             it('should return a list of CmRequest', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        requestId: 1,
                         requestUuid: 'BBBBBB',
                         serviceName: 'BBBBBB',
                         serviceEndpoint: 'BBBBBB',
-                        instanceHostname: currentDate.format(DATE_TIME_FORMAT),
+                        instanceHostname: 'BBBBBB',
                         instancePort: 1,
                         requestBody: 'BBBBBB',
                         requestHeader: 'BBBBBB',
@@ -154,7 +147,6 @@ describe('Service Tests', () => {
                 );
                 const expected = Object.assign(
                     {
-                        instanceHostname: currentDate,
                         startDateTime: currentDate,
                         endDateTime: currentDate
                     },

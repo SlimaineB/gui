@@ -15,7 +15,6 @@
             "detail": {
                 "title": "Cm Error"
             },
-            "errorId": "Error Id",
             "errorComponent": "Error Component",
             "errorCode": "Error Code",
             "errorDescription": "Error Description",

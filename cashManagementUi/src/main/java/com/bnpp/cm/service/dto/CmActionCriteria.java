@@ -25,8 +25,6 @@ public class CmActionCriteria implements Serializable {
 
     private LongFilter id;
 
-    private LongFilter actionId;
-
     private IntegerFilter actionNum;
 
     private StringFilter actionType;
@@ -52,14 +50,6 @@ public class CmActionCriteria implements Serializable {
 
     public void setId(LongFilter id) {
         this.id = id;
-    }
-
-    public LongFilter getActionId() {
-        return actionId;
-    }
-
-    public void setActionId(LongFilter actionId) {
-        this.actionId = actionId;
     }
 
     public IntegerFilter getActionNum() {
@@ -138,7 +128,6 @@ public class CmActionCriteria implements Serializable {
         final CmActionCriteria that = (CmActionCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(actionId, that.actionId) &&
             Objects.equals(actionNum, that.actionNum) &&
             Objects.equals(actionType, that.actionType) &&
             Objects.equals(actionDescription, that.actionDescription) &&
@@ -153,7 +142,6 @@ public class CmActionCriteria implements Serializable {
     public int hashCode() {
         return Objects.hash(
         id,
-        actionId,
         actionNum,
         actionType,
         actionDescription,
@@ -169,7 +157,6 @@ public class CmActionCriteria implements Serializable {
     public String toString() {
         return "CmActionCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (actionId != null ? "actionId=" + actionId + ", " : "") +
                 (actionNum != null ? "actionNum=" + actionNum + ", " : "") +
                 (actionType != null ? "actionType=" + actionType + ", " : "") +
                 (actionDescription != null ? "actionDescription=" + actionDescription + ", " : "") +

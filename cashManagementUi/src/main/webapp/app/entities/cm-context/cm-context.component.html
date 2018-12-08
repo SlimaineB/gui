@@ -15,7 +15,6 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="contextId"><span jhiTranslate="cashManagementUiApp.cmContext.contextId">Context Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="contextType"><span jhiTranslate="cashManagementUiApp.cmContext.contextType">Context Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="contextName"><span jhiTranslate="cashManagementUiApp.cmContext.contextName">Context Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="contextValue"><span jhiTranslate="cashManagementUiApp.cmContext.contextValue">Context Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -27,7 +26,6 @@
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let cmContext of cmContexts ;trackBy: trackId">
                 <td><a [routerLink]="['/cm-context', cmContext.id, 'view' ]">{{cmContext.id}}</a></td>
-                <td>{{cmContext.contextId}}</td>
                 <td>{{cmContext.contextType}}</td>
                 <td>{{cmContext.contextName}}</td>
                 <td>{{cmContext.contextValue}}</td>

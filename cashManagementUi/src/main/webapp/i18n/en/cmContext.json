@@ -15,7 +15,6 @@
             "detail": {
                 "title": "Cm Context"
             },
-            "contextId": "Context Id",
             "contextType": "Context Type",
             "contextName": "Context Name",
             "contextValue": "Context Value",

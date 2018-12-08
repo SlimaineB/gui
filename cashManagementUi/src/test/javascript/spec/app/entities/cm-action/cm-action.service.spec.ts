@@ -25,7 +25,7 @@ describe('Service Tests', () => {
             httpMock = injector.get(HttpTestingController);
             currentDate = moment();
 
-            elemDefault = new CmAction(0, 0, 0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', currentDate, 0);
+            elemDefault = new CmAction(0, 0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', currentDate, 0);
         });
 
         describe('Service methods', async () => {
@@ -70,7 +70,6 @@ describe('Service Tests', () => {
             it('should update a CmAction', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        actionId: 1,
                         actionNum: 1,
                         actionType: 'BBBBBB',
                         actionDescription: 'BBBBBB',
@@ -99,7 +98,6 @@ describe('Service Tests', () => {
             it('should return a list of CmAction', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        actionId: 1,
                         actionNum: 1,
                         actionType: 'BBBBBB',
                         actionDescription: 'BBBBBB',

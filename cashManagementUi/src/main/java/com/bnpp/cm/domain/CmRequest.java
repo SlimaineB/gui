@@ -26,9 +26,6 @@ public class CmRequest implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "request_id")
-    private Long requestId;
-
     @Column(name = "request_uuid")
     private String requestUuid;
 
@@ -39,7 +36,7 @@ public class CmRequest implements Serializable {
     private String serviceEndpoint;
 
     @Column(name = "instance_hostname")
-    private Instant instanceHostname;
+    private String instanceHostname;
 
     @Column(name = "instance_port")
     private Integer instancePort;
@@ -92,19 +89,6 @@ public class CmRequest implements Serializable {
         this.id = id;
     }
 
-    public Long getRequestId() {
-        return requestId;
-    }
-
-    public CmRequest requestId(Long requestId) {
-        this.requestId = requestId;
-        return this;
-    }
-
-    public void setRequestId(Long requestId) {
-        this.requestId = requestId;
-    }
-
     public String getRequestUuid() {
         return requestUuid;
     }
@@ -144,16 +128,16 @@ public class CmRequest implements Serializable {
         this.serviceEndpoint = serviceEndpoint;
     }
 
-    public Instant getInstanceHostname() {
+    public String getInstanceHostname() {
         return instanceHostname;
     }
 
-    public CmRequest instanceHostname(Instant instanceHostname) {
+    public CmRequest instanceHostname(String instanceHostname) {
         this.instanceHostname = instanceHostname;
         return this;
     }
 
-    public void setInstanceHostname(Instant instanceHostname) {
+    public void setInstanceHostname(String instanceHostname) {
         this.instanceHostname = instanceHostname;
     }
 
@@ -400,7 +384,6 @@ public class CmRequest implements Serializable {
     public String toString() {
         return "CmRequest{" +
             "id=" + getId() +
-            ", requestId=" + getRequestId() +
             ", requestUuid='" + getRequestUuid() + "'" +
             ", serviceName='" + getServiceName() + "'" +
             ", serviceEndpoint='" + getServiceEndpoint() + "'" +

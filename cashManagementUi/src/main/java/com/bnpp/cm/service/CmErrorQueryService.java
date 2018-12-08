@@ -83,9 +83,6 @@ public class CmErrorQueryService extends QueryService<CmError> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), CmError_.id));
             }
-            if (criteria.getErrorId() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getErrorId(), CmError_.errorId));
-            }
             if (criteria.getErrorComponent() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getErrorComponent(), CmError_.errorComponent));
             }

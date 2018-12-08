@@ -15,7 +15,6 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="actionId"><span jhiTranslate="cashManagementUiApp.cmAction.actionId">Action Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="actionNum"><span jhiTranslate="cashManagementUiApp.cmAction.actionNum">Action Num</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="actionType"><span jhiTranslate="cashManagementUiApp.cmAction.actionType">Action Type</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="actionDescription"><span jhiTranslate="cashManagementUiApp.cmAction.actionDescription">Action Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -30,7 +29,6 @@
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let cmAction of cmActions ;trackBy: trackId">
                 <td><a [routerLink]="['/cm-action', cmAction.id, 'view' ]">{{cmAction.id}}</a></td>
-                <td>{{cmAction.actionId}}</td>
                 <td>{{cmAction.actionNum}}</td>
                 <td>{{cmAction.actionType}}</td>
                 <td>{{cmAction.actionDescription}}</td>

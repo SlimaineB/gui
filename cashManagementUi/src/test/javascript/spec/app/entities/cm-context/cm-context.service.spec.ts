@@ -25,7 +25,7 @@ describe('Service Tests', () => {
             httpMock = injector.get(HttpTestingController);
             currentDate = moment();
 
-            elemDefault = new CmContext(0, 0, 0, 'AAAAAAA', 'AAAAAAA', currentDate);
+            elemDefault = new CmContext(0, 0, 'AAAAAAA', 'AAAAAAA', currentDate);
         });
 
         describe('Service methods', async () => {
@@ -70,7 +70,6 @@ describe('Service Tests', () => {
             it('should update a CmContext', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        contextId: 1,
                         contextType: 1,
                         contextName: 'BBBBBB',
                         contextValue: 'BBBBBB',
@@ -96,7 +95,6 @@ describe('Service Tests', () => {
             it('should return a list of CmContext', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        contextId: 1,
                         contextType: 1,
                         contextName: 'BBBBBB',
                         contextValue: 'BBBBBB',

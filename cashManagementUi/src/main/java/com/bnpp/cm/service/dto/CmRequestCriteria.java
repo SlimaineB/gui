@@ -25,15 +25,13 @@ public class CmRequestCriteria implements Serializable {
 
     private LongFilter id;
 
-    private LongFilter requestId;
-
     private StringFilter requestUuid;
 
     private StringFilter serviceName;
 
     private StringFilter serviceEndpoint;
 
-    private InstantFilter instanceHostname;
+    private StringFilter instanceHostname;
 
     private IntegerFilter instancePort;
 
@@ -74,14 +72,6 @@ public class CmRequestCriteria implements Serializable {
         this.id = id;
     }
 
-    public LongFilter getRequestId() {
-        return requestId;
-    }
-
-    public void setRequestId(LongFilter requestId) {
-        this.requestId = requestId;
-    }
-
     public StringFilter getRequestUuid() {
         return requestUuid;
     }
@@ -106,11 +96,11 @@ public class CmRequestCriteria implements Serializable {
         this.serviceEndpoint = serviceEndpoint;
     }
 
-    public InstantFilter getInstanceHostname() {
+    public StringFilter getInstanceHostname() {
         return instanceHostname;
     }
 
-    public void setInstanceHostname(InstantFilter instanceHostname) {
+    public void setInstanceHostname(StringFilter instanceHostname) {
         this.instanceHostname = instanceHostname;
     }
 
@@ -238,7 +228,6 @@ public class CmRequestCriteria implements Serializable {
         final CmRequestCriteria that = (CmRequestCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(requestId, that.requestId) &&
             Objects.equals(requestUuid, that.requestUuid) &&
             Objects.equals(serviceName, that.serviceName) &&
             Objects.equals(serviceEndpoint, that.serviceEndpoint) &&
@@ -263,7 +252,6 @@ public class CmRequestCriteria implements Serializable {
     public int hashCode() {
         return Objects.hash(
         id,
-        requestId,
         requestUuid,
         serviceName,
         serviceEndpoint,
@@ -289,7 +277,6 @@ public class CmRequestCriteria implements Serializable {
     public String toString() {
         return "CmRequestCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (requestId != null ? "requestId=" + requestId + ", " : "") +
                 (requestUuid != null ? "requestUuid=" + requestUuid + ", " : "") +
                 (serviceName != null ? "serviceName=" + serviceName + ", " : "") +
                 (serviceEndpoint != null ? "serviceEndpoint=" + serviceEndpoint + ", " : "") +

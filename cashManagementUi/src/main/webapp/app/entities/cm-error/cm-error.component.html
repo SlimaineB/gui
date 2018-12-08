@@ -15,7 +15,6 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="reset.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="errorId"><span jhiTranslate="cashManagementUiApp.cmError.errorId">Error Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="errorComponent"><span jhiTranslate="cashManagementUiApp.cmError.errorComponent">Error Component</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="errorCode"><span jhiTranslate="cashManagementUiApp.cmError.errorCode">Error Code</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="errorDescription"><span jhiTranslate="cashManagementUiApp.cmError.errorDescription">Error Description</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -28,7 +27,6 @@
             <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
             <tr *ngFor="let cmError of cmErrors ;trackBy: trackId">
                 <td><a [routerLink]="['/cm-error', cmError.id, 'view' ]">{{cmError.id}}</a></td>
-                <td>{{cmError.errorId}}</td>
                 <td>{{cmError.errorComponent}}</td>
                 <td>{{cmError.errorCode}}</td>
                 <td>{{cmError.errorDescription}}</td>

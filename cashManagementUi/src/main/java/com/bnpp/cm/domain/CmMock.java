@@ -22,9 +22,6 @@ public class CmMock implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "mock_id")
-    private Long mockId;
-
     @Column(name = "mock_service_name")
     private Integer mockServiceName;
 
@@ -50,19 +47,6 @@ public class CmMock implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getMockId() {
-        return mockId;
-    }
-
-    public CmMock mockId(Long mockId) {
-        this.mockId = mockId;
-        return this;
-    }
-
-    public void setMockId(Long mockId) {
-        this.mockId = mockId;
     }
 
     public Integer getMockServiceName() {
@@ -168,7 +152,6 @@ public class CmMock implements Serializable {
     public String toString() {
         return "CmMock{" +
             "id=" + getId() +
-            ", mockId=" + getMockId() +
             ", mockServiceName=" + getMockServiceName() +
             ", mockSearchKey='" + getMockSearchKey() + "'" +
             ", mockSearchValue='" + getMockSearchValue() + "'" +

@@ -25,8 +25,6 @@ public class CmErrorCriteria implements Serializable {
 
     private LongFilter id;
 
-    private LongFilter errorId;
-
     private IntegerFilter errorComponent;
 
     private StringFilter errorCode;
@@ -48,14 +46,6 @@ public class CmErrorCriteria implements Serializable {
 
     public void setId(LongFilter id) {
         this.id = id;
-    }
-
-    public LongFilter getErrorId() {
-        return errorId;
-    }
-
-    public void setErrorId(LongFilter errorId) {
-        this.errorId = errorId;
     }
 
     public IntegerFilter getErrorComponent() {
@@ -118,7 +108,6 @@ public class CmErrorCriteria implements Serializable {
         final CmErrorCriteria that = (CmErrorCriteria) o;
         return
             Objects.equals(id, that.id) &&
-            Objects.equals(errorId, that.errorId) &&
             Objects.equals(errorComponent, that.errorComponent) &&
             Objects.equals(errorCode, that.errorCode) &&
             Objects.equals(errorDescription, that.errorDescription) &&
@@ -131,7 +120,6 @@ public class CmErrorCriteria implements Serializable {
     public int hashCode() {
         return Objects.hash(
         id,
-        errorId,
         errorComponent,
         errorCode,
         errorDescription,
@@ -145,7 +133,6 @@ public class CmErrorCriteria implements Serializable {
     public String toString() {
         return "CmErrorCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
-                (errorId != null ? "errorId=" + errorId + ", " : "") +
                 (errorComponent != null ? "errorComponent=" + errorComponent + ", " : "") +
                 (errorCode != null ? "errorCode=" + errorCode + ", " : "") +
                 (errorDescription != null ? "errorDescription=" + errorDescription + ", " : "") +

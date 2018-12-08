@@ -83,9 +83,6 @@ public class CmContextQueryService extends QueryService<CmContext> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), CmContext_.id));
             }
-            if (criteria.getContextId() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getContextId(), CmContext_.contextId));
-            }
             if (criteria.getContextType() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getContextType(), CmContext_.contextType));
             }

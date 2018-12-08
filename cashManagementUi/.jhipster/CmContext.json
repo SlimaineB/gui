@@ -2,10 +2,6 @@
     "name": "CmContext",
     "fields": [
         {
-            "fieldName": "contextId",
-            "fieldType": "Long"
-        },
-        {
             "fieldName": "contextType",
             "fieldType": "Integer"
         },

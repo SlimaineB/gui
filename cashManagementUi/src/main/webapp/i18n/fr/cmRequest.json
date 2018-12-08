@@ -15,7 +15,6 @@
             "detail": {
                 "title": "Cm Request"
             },
-            "requestId": "Request Id",
             "requestUuid": "Request Uuid",
             "serviceName": "Service Name",
             "serviceEndpoint": "Service Endpoint",

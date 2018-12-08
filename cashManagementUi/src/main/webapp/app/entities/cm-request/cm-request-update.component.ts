@@ -15,7 +15,6 @@ import { CmRequestService } from './cm-request.service';
 export class CmRequestUpdateComponent implements OnInit {
     cmRequest: ICmRequest;
     isSaving: boolean;
-    instanceHostname: string;
     startDateTime: string;
     endDateTime: string;
 
@@ -25,8 +24,6 @@ export class CmRequestUpdateComponent implements OnInit {
         this.isSaving = false;
         this.activatedRoute.data.subscribe(({ cmRequest }) => {
             this.cmRequest = cmRequest;
-            this.instanceHostname =
-                this.cmRequest.instanceHostname != null ? this.cmRequest.instanceHostname.format(DATE_TIME_FORMAT) : null;
             this.startDateTime = this.cmRequest.startDateTime != null ? this.cmRequest.startDateTime.format(DATE_TIME_FORMAT) : null;
             this.endDateTime = this.cmRequest.endDateTime != null ? this.cmRequest.endDateTime.format(DATE_TIME_FORMAT) : null;
         });
@@ -38,7 +35,6 @@ export class CmRequestUpdateComponent implements OnInit {
 
     save() {
         this.isSaving = true;
-        this.cmRequest.instanceHostname = this.instanceHostname != null ? moment(this.instanceHostname, DATE_TIME_FORMAT) : null;
         this.cmRequest.startDateTime = this.startDateTime != null ? moment(this.startDateTime, DATE_TIME_FORMAT) : null;
         this.cmRequest.endDateTime = this.endDateTime != null ? moment(this.endDateTime, DATE_TIME_FORMAT) : null;
         if (this.cmRequest.id !== undefined) {

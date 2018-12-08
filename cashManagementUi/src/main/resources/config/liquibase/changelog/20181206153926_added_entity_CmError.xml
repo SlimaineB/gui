@@ -22,10 +22,6 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="error_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
             <column name="error_component" type="integer">
                 <constraints nullable="true" />
             </column>

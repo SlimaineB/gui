@@ -22,10 +22,6 @@
             <column name="id" type="bigint" autoIncrement="${autoIncrement}">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="request_id" type="bigint">
-                <constraints nullable="true" />
-            </column>
-
             <column name="request_uuid" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
@@ -38,7 +34,7 @@
                 <constraints nullable="true" />
             </column>
 
-            <column name="instance_hostname" type="datetime">
+            <column name="instance_hostname" type="varchar(255)">
                 <constraints nullable="true" />
             </column>
 
@@ -88,7 +84,6 @@
 
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="cm_request" columnName="instance_hostname" columnDataType="datetime"/>
         <dropDefaultValue tableName="cm_request" columnName="start_date_time" columnDataType="datetime"/>
         <dropDefaultValue tableName="cm_request" columnName="end_date_time" columnDataType="datetime"/>
         

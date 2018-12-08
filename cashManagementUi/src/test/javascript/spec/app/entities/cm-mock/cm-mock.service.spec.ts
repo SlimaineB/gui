@@ -21,7 +21,7 @@ describe('Service Tests', () => {
             service = injector.get(CmMockService);
             httpMock = injector.get(HttpTestingController);
 
-            elemDefault = new CmMock(0, 0, 0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0);
+            elemDefault = new CmMock(0, 0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 0);
         });
 
         describe('Service methods', async () => {
@@ -55,7 +55,6 @@ describe('Service Tests', () => {
             it('should update a CmMock', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        mockId: 1,
                         mockServiceName: 1,
                         mockSearchKey: 'BBBBBB',
                         mockSearchValue: 'BBBBBB',
@@ -78,7 +77,6 @@ describe('Service Tests', () => {
             it('should return a list of CmMock', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        mockId: 1,
                         mockServiceName: 1,
                         mockSearchKey: 'BBBBBB',
                         mockSearchValue: 'BBBBBB',

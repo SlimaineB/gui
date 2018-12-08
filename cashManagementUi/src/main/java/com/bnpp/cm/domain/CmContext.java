@@ -24,9 +24,6 @@ public class CmContext implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "context_id")
-    private Long contextId;
-
     @Column(name = "context_type")
     private Integer contextType;
 
@@ -50,19 +47,6 @@ public class CmContext implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getContextId() {
-        return contextId;
-    }
-
-    public CmContext contextId(Long contextId) {
-        this.contextId = contextId;
-        return this;
-    }
-
-    public void setContextId(Long contextId) {
-        this.contextId = contextId;
     }
 
     public Integer getContextType() {
@@ -155,7 +139,6 @@ public class CmContext implements Serializable {
     public String toString() {
         return "CmContext{" +
             "id=" + getId() +
-            ", contextId=" + getContextId() +
             ", contextType=" + getContextType() +
             ", contextName='" + getContextName() + "'" +
             ", contextValue='" + getContextValue() + "'" +

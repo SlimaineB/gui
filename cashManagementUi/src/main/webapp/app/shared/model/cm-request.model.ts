@@ -5,11 +5,10 @@ import { ICmError } from 'app/shared/model//cm-error.model';
 
 export interface ICmRequest {
     id?: number;
-    requestId?: number;
     requestUuid?: string;
     serviceName?: string;
     serviceEndpoint?: string;
-    instanceHostname?: Moment;
+    instanceHostname?: string;
     instancePort?: number;
     requestBody?: string;
     requestHeader?: string;
@@ -29,11 +28,10 @@ export interface ICmRequest {
 export class CmRequest implements ICmRequest {
     constructor(
         public id?: number,
-        public requestId?: number,
         public requestUuid?: string,
         public serviceName?: string,
         public serviceEndpoint?: string,
-        public instanceHostname?: Moment,
+        public instanceHostname?: string,
         public instancePort?: number,
         public requestBody?: string,
         public requestHeader?: string,

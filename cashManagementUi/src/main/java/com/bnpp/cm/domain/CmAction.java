@@ -24,9 +24,6 @@ public class CmAction implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "action_id")
-    private Long actionId;
-
     @Column(name = "action_num")
     private Integer actionNum;
 
@@ -59,19 +56,6 @@ public class CmAction implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getActionId() {
-        return actionId;
-    }
-
-    public CmAction actionId(Long actionId) {
-        this.actionId = actionId;
-        return this;
-    }
-
-    public void setActionId(Long actionId) {
-        this.actionId = actionId;
     }
 
     public Integer getActionNum() {
@@ -203,7 +187,6 @@ public class CmAction implements Serializable {
     public String toString() {
         return "CmAction{" +
             "id=" + getId() +
-            ", actionId=" + getActionId() +
             ", actionNum=" + getActionNum() +
             ", actionType='" + getActionType() + "'" +
             ", actionDescription='" + getActionDescription() + "'" +

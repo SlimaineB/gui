@@ -15,7 +15,6 @@
             "detail": {
                 "title": "Cm Action"
             },
-            "actionId": "Action Id",
             "actionNum": "Action Num",
             "actionType": "Action Type",
             "actionDescription": "Action Description",

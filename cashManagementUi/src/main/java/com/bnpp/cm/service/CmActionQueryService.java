@@ -83,9 +83,6 @@ public class CmActionQueryService extends QueryService<CmAction> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), CmAction_.id));
             }
-            if (criteria.getActionId() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getActionId(), CmAction_.actionId));
-            }
             if (criteria.getActionNum() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getActionNum(), CmAction_.actionNum));
             }

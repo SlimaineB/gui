@@ -45,9 +45,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = CashManagementUiApp.class)
 public class CmErrorResourceIntTest {
 
-    private static final Long DEFAULT_ERROR_ID = 1L;
-    private static final Long UPDATED_ERROR_ID = 2L;
-
     private static final Integer DEFAULT_ERROR_COMPONENT = 1;
     private static final Integer UPDATED_ERROR_COMPONENT = 2;
 
@@ -107,7 +104,6 @@ public class CmErrorResourceIntTest {
      */
     public static CmError createEntity(EntityManager em) {
         CmError cmError = new CmError()
-            .errorId(DEFAULT_ERROR_ID)
             .errorComponent(DEFAULT_ERROR_COMPONENT)
             .errorCode(DEFAULT_ERROR_CODE)
             .errorDescription(DEFAULT_ERROR_DESCRIPTION)
@@ -136,7 +132,6 @@ public class CmErrorResourceIntTest {
         List<CmError> cmErrorList = cmErrorRepository.findAll();
         assertThat(cmErrorList).hasSize(databaseSizeBeforeCreate + 1);
         CmError testCmError = cmErrorList.get(cmErrorList.size() - 1);
-        assertThat(testCmError.getErrorId()).isEqualTo(DEFAULT_ERROR_ID);
         assertThat(testCmError.getErrorComponent()).isEqualTo(DEFAULT_ERROR_COMPONENT);
         assertThat(testCmError.getErrorCode()).isEqualTo(DEFAULT_ERROR_CODE);
         assertThat(testCmError.getErrorDescription()).isEqualTo(DEFAULT_ERROR_DESCRIPTION);
@@ -174,7 +169,6 @@ public class CmErrorResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(cmError.getId().intValue())))
-            .andExpect(jsonPath("$.[*].errorId").value(hasItem(DEFAULT_ERROR_ID.intValue())))
             .andExpect(jsonPath("$.[*].errorComponent").value(hasItem(DEFAULT_ERROR_COMPONENT)))
             .andExpect(jsonPath("$.[*].errorCode").value(hasItem(DEFAULT_ERROR_CODE.toString())))
             .andExpect(jsonPath("$.[*].errorDescription").value(hasItem(DEFAULT_ERROR_DESCRIPTION.toString())))
@@ -193,79 +187,12 @@ public class CmErrorResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(cmError.getId().intValue()))
-            .andExpect(jsonPath("$.errorId").value(DEFAULT_ERROR_ID.intValue()))
             .andExpect(jsonPath("$.errorComponent").value(DEFAULT_ERROR_COMPONENT))
             .andExpect(jsonPath("$.errorCode").value(DEFAULT_ERROR_CODE.toString()))
             .andExpect(jsonPath("$.errorDescription").value(DEFAULT_ERROR_DESCRIPTION.toString()))
             .andExpect(jsonPath("$.errorStackTrace").value(DEFAULT_ERROR_STACK_TRACE.toString()))
             .andExpect(jsonPath("$.errornDateTime").value(DEFAULT_ERRORN_DATE_TIME.toString()));
     }
-
-    @Test
-    @Transactional
-    public void getAllCmErrorsByErrorIdIsEqualToSomething() throws Exception {
-        // Initialize the database
-        cmErrorRepository.saveAndFlush(cmError);
-
-        // Get all the cmErrorList where errorId equals to DEFAULT_ERROR_ID
-        defaultCmErrorShouldBeFound("errorId.equals=" + DEFAULT_ERROR_ID);
-
-        // Get all the cmErrorList where errorId equals to UPDATED_ERROR_ID
-        defaultCmErrorShouldNotBeFound("errorId.equals=" + UPDATED_ERROR_ID);
-    }
-
-    @Test
-    @Transactional
-    public void getAllCmErrorsByErrorIdIsInShouldWork() throws Exception {
-        // Initialize the database
-        cmErrorRepository.saveAndFlush(cmError);
-
-        // Get all the cmErrorList where errorId in DEFAULT_ERROR_ID or UPDATED_ERROR_ID
-        defaultCmErrorShouldBeFound("errorId.in=" + DEFAULT_ERROR_ID + "," + UPDATED_ERROR_ID);
-
-        // Get all the cmErrorList where errorId equals to UPDATED_ERROR_ID
-        defaultCmErrorShouldNotBeFound("errorId.in=" + UPDATED_ERROR_ID);
-    }
-
-    @Test
-    @Transactional
-    public void getAllCmErrorsByErrorIdIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        cmErrorRepository.saveAndFlush(cmError);
-
-        // Get all the cmErrorList where errorId is not null
-        defaultCmErrorShouldBeFound("errorId.specified=true");
-
-        // Get all the cmErrorList where errorId is null
-        defaultCmErrorShouldNotBeFound("errorId.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllCmErrorsByErrorIdIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        cmErrorRepository.saveAndFlush(cmError);
-
-        // Get all the cmErrorList where errorId greater than or equals to DEFAULT_ERROR_ID
-        defaultCmErrorShouldBeFound("errorId.greaterOrEqualThan=" + DEFAULT_ERROR_ID);
-
-        // Get all the cmErrorList where errorId greater than or equals to UPDATED_ERROR_ID
-        defaultCmErrorShouldNotBeFound("errorId.greaterOrEqualThan=" + UPDATED_ERROR_ID);
-    }
-
-    @Test
-    @Transactional
-    public void getAllCmErrorsByErrorIdIsLessThanSomething() throws Exception {
-        // Initialize the database
-        cmErrorRepository.saveAndFlush(cmError);
-
-        // Get all the cmErrorList where errorId less than or equals to DEFAULT_ERROR_ID
-        defaultCmErrorShouldNotBeFound("errorId.lessThan=" + DEFAULT_ERROR_ID);
-
-        // Get all the cmErrorList where errorId less than or equals to UPDATED_ERROR_ID
-        defaultCmErrorShouldBeFound("errorId.lessThan=" + UPDATED_ERROR_ID);
-    }
-
 
     @Test
     @Transactional
@@ -515,7 +442,6 @@ public class CmErrorResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(cmError.getId().intValue())))
-            .andExpect(jsonPath("$.[*].errorId").value(hasItem(DEFAULT_ERROR_ID.intValue())))
             .andExpect(jsonPath("$.[*].errorComponent").value(hasItem(DEFAULT_ERROR_COMPONENT)))
             .andExpect(jsonPath("$.[*].errorCode").value(hasItem(DEFAULT_ERROR_CODE.toString())))
             .andExpect(jsonPath("$.[*].errorDescription").value(hasItem(DEFAULT_ERROR_DESCRIPTION.toString())))
@@ -568,7 +494,6 @@ public class CmErrorResourceIntTest {
         // Disconnect from session so that the updates on updatedCmError are not directly saved in db
         em.detach(updatedCmError);
         updatedCmError
-            .errorId(UPDATED_ERROR_ID)
             .errorComponent(UPDATED_ERROR_COMPONENT)
             .errorCode(UPDATED_ERROR_CODE)
             .errorDescription(UPDATED_ERROR_DESCRIPTION)
@@ -584,7 +509,6 @@ public class CmErrorResourceIntTest {
         List<CmError> cmErrorList = cmErrorRepository.findAll();
         assertThat(cmErrorList).hasSize(databaseSizeBeforeUpdate);
         CmError testCmError = cmErrorList.get(cmErrorList.size() - 1);
-        assertThat(testCmError.getErrorId()).isEqualTo(UPDATED_ERROR_ID);
         assertThat(testCmError.getErrorComponent()).isEqualTo(UPDATED_ERROR_COMPONENT);
         assertThat(testCmError.getErrorCode()).isEqualTo(UPDATED_ERROR_CODE);
         assertThat(testCmError.getErrorDescription()).isEqualTo(UPDATED_ERROR_DESCRIPTION);

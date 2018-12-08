@@ -15,7 +15,6 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th jhiSortBy="mockId"><span jhiTranslate="cashManagementUiApp.cmMock.mockId">Mock Id</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="mockServiceName"><span jhiTranslate="cashManagementUiApp.cmMock.mockServiceName">Mock Service Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="mockSearchKey"><span jhiTranslate="cashManagementUiApp.cmMock.mockSearchKey">Mock Search Key</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="mockSearchValue"><span jhiTranslate="cashManagementUiApp.cmMock.mockSearchValue">Mock Search Value</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -28,7 +27,6 @@
             <tbody>
             <tr *ngFor="let cmMock of cmMocks ;trackBy: trackId">
                 <td><a [routerLink]="['/cm-mock', cmMock.id, 'view' ]">{{cmMock.id}}</a></td>
-                <td>{{cmMock.mockId}}</td>
                 <td>{{cmMock.mockServiceName}}</td>
                 <td>{{cmMock.mockSearchKey}}</td>
                 <td>{{cmMock.mockSearchValue}}</td>

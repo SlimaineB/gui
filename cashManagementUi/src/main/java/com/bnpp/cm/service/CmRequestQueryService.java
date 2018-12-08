@@ -83,9 +83,6 @@ public class CmRequestQueryService extends QueryService<CmRequest> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), CmRequest_.id));
             }
-            if (criteria.getRequestId() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getRequestId(), CmRequest_.requestId));
-            }
             if (criteria.getRequestUuid() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getRequestUuid(), CmRequest_.requestUuid));
             }
@@ -96,7 +93,7 @@ public class CmRequestQueryService extends QueryService<CmRequest> {
                 specification = specification.and(buildStringSpecification(criteria.getServiceEndpoint(), CmRequest_.serviceEndpoint));
             }
             if (criteria.getInstanceHostname() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getInstanceHostname(), CmRequest_.instanceHostname));
+                specification = specification.and(buildStringSpecification(criteria.getInstanceHostname(), CmRequest_.instanceHostname));
             }
             if (criteria.getInstancePort() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getInstancePort(), CmRequest_.instancePort));

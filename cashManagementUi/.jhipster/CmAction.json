@@ -2,10 +2,6 @@
     "name": "CmAction",
     "fields": [
         {
-            "fieldName": "actionId",
-            "fieldType": "Long"
-        },
-        {
             "fieldName": "actionNum",
             "fieldType": "Integer"
         },

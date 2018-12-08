@@ -83,9 +83,6 @@ public class CmMockQueryService extends QueryService<CmMock> {
             if (criteria.getId() != null) {
                 specification = specification.and(buildSpecification(criteria.getId(), CmMock_.id));
             }
-            if (criteria.getMockId() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getMockId(), CmMock_.mockId));
-            }
             if (criteria.getMockServiceName() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getMockServiceName(), CmMock_.mockServiceName));
             }

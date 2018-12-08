@@ -10,11 +10,6 @@
                         [(ngModel)]="cmRequest.id" readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.requestId" for="field_requestId">Request Id</label>
-                    <input type="number" class="form-control" name="requestId" id="field_requestId"
-                        [(ngModel)]="cmRequest.requestId" />
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.requestUuid" for="field_requestUuid">Request Uuid</label>
                     <input type="text" class="form-control" name="requestUuid" id="field_requestUuid"
                         [(ngModel)]="cmRequest.requestUuid" />
@@ -31,10 +26,8 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.instanceHostname" for="field_instanceHostname">Instance Hostname</label>
-                    <div class="d-flex">
-                        <input id="field_instanceHostname" type="datetime-local" class="form-control" name="instanceHostname" [(ngModel)]="instanceHostname"
-                        />
-                    </div>
+                    <input type="text" class="form-control" name="instanceHostname" id="field_instanceHostname"
+                        [(ngModel)]="cmRequest.instanceHostname" />
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="cashManagementUiApp.cmRequest.instancePort" for="field_instancePort">Instance Port</label>

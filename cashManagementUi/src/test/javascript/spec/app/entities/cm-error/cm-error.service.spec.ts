@@ -25,7 +25,7 @@ describe('Service Tests', () => {
             httpMock = injector.get(HttpTestingController);
             currentDate = moment();
 
-            elemDefault = new CmError(0, 0, 0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', currentDate);
+            elemDefault = new CmError(0, 0, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', currentDate);
         });
 
         describe('Service methods', async () => {
@@ -70,7 +70,6 @@ describe('Service Tests', () => {
             it('should update a CmError', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        errorId: 1,
                         errorComponent: 1,
                         errorCode: 'BBBBBB',
                         errorDescription: 'BBBBBB',
@@ -97,7 +96,6 @@ describe('Service Tests', () => {
             it('should return a list of CmError', async () => {
                 const returnedFromService = Object.assign(
                     {
-                        errorId: 1,
                         errorComponent: 1,
                         errorCode: 'BBBBBB',
                         errorDescription: 'BBBBBB',

@@ -45,9 +45,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = CashManagementUiApp.class)
 public class CmActionResourceIntTest {
 
-    private static final Long DEFAULT_ACTION_ID = 1L;
-    private static final Long UPDATED_ACTION_ID = 2L;
-
     private static final Integer DEFAULT_ACTION_NUM = 1;
     private static final Integer UPDATED_ACTION_NUM = 2;
 
@@ -113,7 +110,6 @@ public class CmActionResourceIntTest {
      */
     public static CmAction createEntity(EntityManager em) {
         CmAction cmAction = new CmAction()
-            .actionId(DEFAULT_ACTION_ID)
             .actionNum(DEFAULT_ACTION_NUM)
             .actionType(DEFAULT_ACTION_TYPE)
             .actionDescription(DEFAULT_ACTION_DESCRIPTION)
@@ -144,7 +140,6 @@ public class CmActionResourceIntTest {
         List<CmAction> cmActionList = cmActionRepository.findAll();
         assertThat(cmActionList).hasSize(databaseSizeBeforeCreate + 1);
         CmAction testCmAction = cmActionList.get(cmActionList.size() - 1);
-        assertThat(testCmAction.getActionId()).isEqualTo(DEFAULT_ACTION_ID);
         assertThat(testCmAction.getActionNum()).isEqualTo(DEFAULT_ACTION_NUM);
         assertThat(testCmAction.getActionType()).isEqualTo(DEFAULT_ACTION_TYPE);
         assertThat(testCmAction.getActionDescription()).isEqualTo(DEFAULT_ACTION_DESCRIPTION);
@@ -184,7 +179,6 @@ public class CmActionResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(cmAction.getId().intValue())))
-            .andExpect(jsonPath("$.[*].actionId").value(hasItem(DEFAULT_ACTION_ID.intValue())))
             .andExpect(jsonPath("$.[*].actionNum").value(hasItem(DEFAULT_ACTION_NUM)))
             .andExpect(jsonPath("$.[*].actionType").value(hasItem(DEFAULT_ACTION_TYPE.toString())))
             .andExpect(jsonPath("$.[*].actionDescription").value(hasItem(DEFAULT_ACTION_DESCRIPTION.toString())))
@@ -205,7 +199,6 @@ public class CmActionResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(cmAction.getId().intValue()))
-            .andExpect(jsonPath("$.actionId").value(DEFAULT_ACTION_ID.intValue()))
             .andExpect(jsonPath("$.actionNum").value(DEFAULT_ACTION_NUM))
             .andExpect(jsonPath("$.actionType").value(DEFAULT_ACTION_TYPE.toString()))
             .andExpect(jsonPath("$.actionDescription").value(DEFAULT_ACTION_DESCRIPTION.toString()))
@@ -214,72 +207,6 @@ public class CmActionResourceIntTest {
             .andExpect(jsonPath("$.actionDateTime").value(DEFAULT_ACTION_DATE_TIME.toString()))
             .andExpect(jsonPath("$.actionDuration").value(DEFAULT_ACTION_DURATION));
     }
-
-    @Test
-    @Transactional
-    public void getAllCmActionsByActionIdIsEqualToSomething() throws Exception {
-        // Initialize the database
-        cmActionRepository.saveAndFlush(cmAction);
-
-        // Get all the cmActionList where actionId equals to DEFAULT_ACTION_ID
-        defaultCmActionShouldBeFound("actionId.equals=" + DEFAULT_ACTION_ID);
-
-        // Get all the cmActionList where actionId equals to UPDATED_ACTION_ID
-        defaultCmActionShouldNotBeFound("actionId.equals=" + UPDATED_ACTION_ID);
-    }
-
-    @Test
-    @Transactional
-    public void getAllCmActionsByActionIdIsInShouldWork() throws Exception {
-        // Initialize the database
-        cmActionRepository.saveAndFlush(cmAction);
-
-        // Get all the cmActionList where actionId in DEFAULT_ACTION_ID or UPDATED_ACTION_ID
-        defaultCmActionShouldBeFound("actionId.in=" + DEFAULT_ACTION_ID + "," + UPDATED_ACTION_ID);
-
-        // Get all the cmActionList where actionId equals to UPDATED_ACTION_ID
-        defaultCmActionShouldNotBeFound("actionId.in=" + UPDATED_ACTION_ID);
-    }
-
-    @Test
-    @Transactional
-    public void getAllCmActionsByActionIdIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        cmActionRepository.saveAndFlush(cmAction);
-
-        // Get all the cmActionList where actionId is not null
-        defaultCmActionShouldBeFound("actionId.specified=true");
-
-        // Get all the cmActionList where actionId is null
-        defaultCmActionShouldNotBeFound("actionId.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllCmActionsByActionIdIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        cmActionRepository.saveAndFlush(cmAction);
-
-        // Get all the cmActionList where actionId greater than or equals to DEFAULT_ACTION_ID
-        defaultCmActionShouldBeFound("actionId.greaterOrEqualThan=" + DEFAULT_ACTION_ID);
-
-        // Get all the cmActionList where actionId greater than or equals to UPDATED_ACTION_ID
-        defaultCmActionShouldNotBeFound("actionId.greaterOrEqualThan=" + UPDATED_ACTION_ID);
-    }
-
-    @Test
-    @Transactional
-    public void getAllCmActionsByActionIdIsLessThanSomething() throws Exception {
-        // Initialize the database
-        cmActionRepository.saveAndFlush(cmAction);
-
-        // Get all the cmActionList where actionId less than or equals to DEFAULT_ACTION_ID
-        defaultCmActionShouldNotBeFound("actionId.lessThan=" + DEFAULT_ACTION_ID);
-
-        // Get all the cmActionList where actionId less than or equals to UPDATED_ACTION_ID
-        defaultCmActionShouldBeFound("actionId.lessThan=" + UPDATED_ACTION_ID);
-    }
-
 
     @Test
     @Transactional
@@ -634,7 +561,6 @@ public class CmActionResourceIntTest {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(cmAction.getId().intValue())))
-            .andExpect(jsonPath("$.[*].actionId").value(hasItem(DEFAULT_ACTION_ID.intValue())))
             .andExpect(jsonPath("$.[*].actionNum").value(hasItem(DEFAULT_ACTION_NUM)))
             .andExpect(jsonPath("$.[*].actionType").value(hasItem(DEFAULT_ACTION_TYPE.toString())))
             .andExpect(jsonPath("$.[*].actionDescription").value(hasItem(DEFAULT_ACTION_DESCRIPTION.toString())))
@@ -689,7 +615,6 @@ public class CmActionResourceIntTest {
         // Disconnect from session so that the updates on updatedCmAction are not directly saved in db
         em.detach(updatedCmAction);
         updatedCmAction
-            .actionId(UPDATED_ACTION_ID)
             .actionNum(UPDATED_ACTION_NUM)
             .actionType(UPDATED_ACTION_TYPE)
             .actionDescription(UPDATED_ACTION_DESCRIPTION)
@@ -707,7 +632,6 @@ public class CmActionResourceIntTest {
         List<CmAction> cmActionList = cmActionRepository.findAll();
         assertThat(cmActionList).hasSize(databaseSizeBeforeUpdate);
         CmAction testCmAction = cmActionList.get(cmActionList.size() - 1);
-        assertThat(testCmAction.getActionId()).isEqualTo(UPDATED_ACTION_ID);
         assertThat(testCmAction.getActionNum()).isEqualTo(UPDATED_ACTION_NUM);
         assertThat(testCmAction.getActionType()).isEqualTo(UPDATED_ACTION_TYPE);
         assertThat(testCmAction.getActionDescription()).isEqualTo(UPDATED_ACTION_DESCRIPTION);
