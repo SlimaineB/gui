@@ -77,9 +77,9 @@
                 <td>{{cmRequest.serviceEndpoint}}</td>
                 <td>{{cmRequest.instanceHostname}}</td>
                 <td>{{cmRequest.instancePort}}</td>
-                <td>{{cmRequest.requestBody}}</td>
+                <td>{{cmRequest.requestBody | json }}</td>
                 <td>{{cmRequest.requestHeader}}</td>
-                <td>{{cmRequest.responseBody}}</td>
+                <td>{{cmRequest.responseBody | json }}</td>
                 <td>{{cmRequest.responseHeader}}</td>
                 <td>{{cmRequest.returnHttpCode}}</td>
                 <td>{{cmRequest.technicalStatus}}</td>

@@ -55,7 +55,7 @@ export class CmRequestComponent implements OnInit, OnDestroy {
     filter() {
         const endDateTimeFormated = this.endDateTime != null ? moment(this.endDateTime, DATE_TIME_FORMAT) : null;
 
-        let parameters: Object = {
+        const parameters: Object = {
             page: this.page - 1,
             size: this.itemsPerPage,
             sort: this.sort()
@@ -66,14 +66,14 @@ export class CmRequestComponent implements OnInit, OnDestroy {
         }
 
         if (this.startDateTime != null) {
-            let startDateTimeFormated = moment(this.startDateTime, DATE_TIME_FORMAT);
+            const startDateTimeFormated = moment(this.startDateTime, DATE_TIME_FORMAT);
             if (startDateTimeFormated.isValid()) {
                 parameters['startDateTime.greaterOrEqualThan'] = startDateTimeFormated.toJSON();
             }
         }
 
         if (this.endDateTime != null) {
-            let endDateTimeFormated = moment(this.endDateTime, DATE_TIME_FORMAT);
+            const endDateTimeFormated = moment(this.endDateTime, DATE_TIME_FORMAT);
             if (endDateTimeFormated.isValid()) {
                 parameters['endDateTime.lessOrEqualThan'] = endDateTimeFormated.toJSON();
             }
