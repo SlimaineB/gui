@@ -51,7 +51,8 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
             <th jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-             <th jhiSortBy="requestUuid"><span jhiTranslate="cashManagementUiApp.cmRequest.requestUuid">Request Uuid</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th><span jhiTranslate="entity.detail.view.action">Actions</span></th>    
+            <th jhiSortBy="requestUuid"><span jhiTranslate="cashManagementUiApp.cmRequest.requestUuid">Request Uuid</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="serviceName"><span jhiTranslate="cashManagementUiApp.cmRequest.serviceName">Service Name</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="serviceEndpoint"><span jhiTranslate="cashManagementUiApp.cmRequest.serviceEndpoint">Service Endpoint</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th jhiSortBy="instanceHostname"><span jhiTranslate="cashManagementUiApp.cmRequest.instanceHostname">Instance Hostname</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -72,6 +73,16 @@
             <tbody>
             <tr *ngFor="let cmRequest of cmRequests ;trackBy: trackId">
                 <td><a [routerLink]="['/cm-request', cmRequest.id, 'view' ]">{{cmRequest.id}}</a></td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/cm-action', cmRequest.id, 'list' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.detail.view.action">Actions</span>
+                        </button>
+                    </div>
+                </td>                       
                 <td>{{cmRequest.requestUuid}}</td>
                 <td>{{cmRequest.serviceName}}</td>
                 <td>{{cmRequest.serviceEndpoint}}</td>

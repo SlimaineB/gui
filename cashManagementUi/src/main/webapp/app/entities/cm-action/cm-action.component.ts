@@ -8,6 +8,7 @@ import { Principal } from 'app/core';
 
 import { ITEMS_PER_PAGE } from 'app/shared';
 import { CmActionService } from './cm-action.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'jhi-cm-action',
@@ -30,7 +31,8 @@ export class CmActionComponent implements OnInit, OnDestroy {
         private jhiAlertService: JhiAlertService,
         private eventManager: JhiEventManager,
         private parseLinks: JhiParseLinks,
-        private principal: Principal
+        private principal: Principal,
+        private activatedRoute: ActivatedRoute
     ) {
         this.cmActions = [];
         this.itemsPerPage = ITEMS_PER_PAGE;
@@ -67,7 +69,12 @@ export class CmActionComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        this.loadAll();
+        // this.loadAll();
+
+        this.activatedRoute.data.subscribe(({ requestActions }) => {
+            this.paginateCmActions(requestActions.body, requestActions.headers);
+        });
+
         this.principal.identity().then(account => {
             this.currentAccount = account;
         });

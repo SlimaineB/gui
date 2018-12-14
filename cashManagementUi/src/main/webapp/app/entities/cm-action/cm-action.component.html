@@ -38,7 +38,7 @@
                 <td>{{cmAction.actionDuration}}</td>
                 <td>
                     <div *ngIf="cmAction.request">
-                        <a [routerLink]="['../cm-request', cmAction.request?.id, 'view' ]" >{{cmAction.request?.id}}</a>
+                        <a [routerLink]="['/cm-request', cmAction.request?.id, 'view' ]" >{{cmAction.request?.id}}</a>
                     </div>
                 </td>
                 <td class="text-right">

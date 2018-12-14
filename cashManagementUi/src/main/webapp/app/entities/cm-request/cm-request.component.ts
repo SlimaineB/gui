@@ -53,8 +53,6 @@ export class CmRequestComponent implements OnInit, OnDestroy {
     }
 
     filter() {
-        const endDateTimeFormated = this.endDateTime != null ? moment(this.endDateTime, DATE_TIME_FORMAT) : null;
-
         const parameters: Object = {
             page: this.page - 1,
             size: this.itemsPerPage,

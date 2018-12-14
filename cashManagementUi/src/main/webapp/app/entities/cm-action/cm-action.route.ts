@@ -28,6 +28,23 @@ export class CmActionResolve implements Resolve<ICmAction> {
     }
 }
 
+@Injectable({ providedIn: 'root' })
+export class CmActionListResolve implements Resolve<HttpResponse<ICmAction[]>> {
+    constructor(private service: CmActionService) {}
+
+    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<HttpResponse<CmAction[]>> {
+        const requestId = { 'requestId.equals': route.params['id'] ? route.params['id'] : null };
+
+        if (requestId) {
+            return this.service.query(requestId).pipe(
+                filter((response: HttpResponse<CmAction[]>) => response.ok),
+                map((cmActions: HttpResponse<CmAction[]>) => cmActions)
+            );
+        }
+        return of(new HttpResponse<CmAction[]>());
+    }
+}
+
 export const cmActionRoute: Routes = [
     {
         path: 'cm-action',
@@ -67,6 +84,18 @@ export const cmActionRoute: Routes = [
         component: CmActionUpdateComponent,
         resolve: {
             cmAction: CmActionResolve
+        },
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'cashManagementUiApp.cmAction.home.title'
+        },
+        canActivate: [UserRouteAccessService]
+    },
+    {
+        path: 'cm-action/:id/list',
+        component: CmActionComponent,
+        resolve: {
+            requestActions: CmActionListResolve
         },
         data: {
             authorities: ['ROLE_USER'],
